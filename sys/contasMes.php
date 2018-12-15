@@ -15,6 +15,16 @@ $saldo = $pdo->prepare("select sum(valor) as credito from contas where tipo = 2 
 $contas = $saldo->execute([$mes]);
 $credito = $saldo->fetch()[0];
 $pdo = null;
+$pdo = new PDO($sqlite);
+$saldo = $pdo->prepare("select sum(valor) as credito from contas where tipo = 2 and mes = ? and status = 1");
+$contas = $saldo->execute([$mes]);
+$concluido = $saldo->fetch()[0];
+$pdo = null;
+$pdo = new PDO($sqlite);
+$saldo = $pdo->prepare("select sum(valor) as credito from contas where tipo = 1 and mes = ? and status = 0");
+$contas = $saldo->execute([$mes]);
+$pendente = $saldo->fetch()[0];
+$pdo = null;
 $i = 0;
 
 	while($row = $execucao->fetch()){
@@ -23,13 +33,13 @@ $i = 0;
 		"data_venc"=>$row["data_venc"],
 		"data_pgto"=>$row["data_pgto"],
 		"tipo"=>$row["tipo"],
-	"status"=>$row["stat"]];
+		"status"=>$row["stat"]];
 		$i++;
 	}
 	if($i == 0){
 		$result = 0;
 	}
-	$obj = ["credito"=>$credito,"debito"=>$debito,"despesas"=>$result];
+	$obj = ["pendente"=>round($pendente,2),"concluido"=>round($concluido,2),"credito"=>round($credito,2),"debito"=>round($debito,2),"despesas"=>$result];
 
 	echo json_encode($obj);
 ?>	

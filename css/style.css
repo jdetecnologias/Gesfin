@@ -39,6 +39,12 @@
 	.limparFloat{
 		clear:both;
 	}
+	.itemTabela{
+		margin-top:5px;
+		height:70px;
+		width:500px;
+		border:1px solid black;
+	}
 	#contas table tr td input{
 		border:0;
 	}
@@ -70,11 +76,17 @@
 		position:absolute;
 		right:5px;
 	}
-	html{
+	htm l{
 		background-color:rgba(255,215,0,1); 
 	}
-	#contas input{
+	#contas inp ut{
 		background-color:rgba(255,215,0,1); 
+	}
+	.par{
+		background-color:rgba(255,215,0,1);
+	}
+	.par input{
+		background-color:rgba(255,215,0,1);
 	}
 	#saldos {
 		border-radius:5px;
@@ -85,13 +97,14 @@
 		margin-bottom:10px;
 		position:relative;
 		left:20%;
+		font-family: 'Trebuchet MS',Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;
 	}
 	#saldos table{
 		text-align:center;
 		border-spacing:0;
 	}
 	#saldos table td {
-		width:100px;
+		width:200px;
 		margin:0;
 		border:0;
 	}

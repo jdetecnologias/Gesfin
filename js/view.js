@@ -129,3 +129,7 @@ View.prototype.atualiza = function(argumentos) {
 View.prototype.link = function(anterior){
  anterior.seletorPai.replaceChild(this.getFragment(),anterior.me);
 }
+View.prototype.cp = function(){
+	return this.getFragment();
+}
+

@@ -19,8 +19,10 @@
 	boxLogin.setTemplate(function(){
 		return `
 			<div id="box-login">
+			<form name="login" method="post" action="./sys/logar.php">
 		<fieldset>
 			<label>E-mail</label>
+			<input type="hidden" name="hash" id="hash"/>
 			<input type="text" name="email" id="email"/>
 		</fieldset>
 		<fieldset>
@@ -35,15 +37,27 @@
 		Esqueci a senha | <a href="./cadastro.php">Cadastrar</a>
 		</fieldset>
 	</div>
+	</form>
 		`;
 	});
-	boxLogin.renderizar("#container").adicionarEvento("#logar","click",function(){
+	boxLogin.renderizar("#container");
+	/*.adicionarEvento("#logar","click",function(e){
+		e.preventDefault();
 		var conn = new Conectar();
 		conn.PegarDadosFormulario(boxLogin.me);
 		conn.post("./sys/logar.php",function(){
 			
 		});
-		alert(conn.resposta);
-	});
+		if(conn.resposta == 0){
+			alert("Usuário não existe ou dados de login incorretos");
+		}
+		else{
+			boxLogin.me.querySelector("#hash").value = conn.resposta;
+			var form = boxLogin.me.querySelector("form");
+			form.addEventListener("submit",function(){
+				
+			});
+		}
+	});*/
 </script>
 </html>

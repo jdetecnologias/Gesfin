@@ -21,11 +21,16 @@
 			html += `<tr><td colspan=5>Não há resultados a serem apresentados</td></tr>`;
 		}
 		else{
-			resposta.despesas.map(itm=>{
+			extrato.atualizaTemplate([resposta.despesas]);
+			resposta.despesas.map((itm,indice)=>{
 				if(itm.data_pgto == null){
 					itm.data_pgto = "";
 				}
-				html += ` <tr id='${itm.id}'>\n
+				var classe ="impar";
+				if(indice%2 ==0){
+					classe="par";
+				}
+				html += ` <tr class="${classe}"id='${itm.id}'>\n
 				<td coluna='descricao'>	<input type='text'  value='${itm.descricao}' />	</td>\n
 				<td coluna='valor'>			<input type='text'  value='${itm.valor}' />		</td>\n
 				<td coluna='data_venc'>	<input type='date'  value='${itm.data_venc}' />	</td>\n
@@ -38,7 +43,7 @@
 		html += `</table>
 		</div>
 		`;
-		painelSaldo.atualiza([resposta.credito,resposta.debito]);
+		painelSaldo.atualiza([resposta.credito,resposta.debito, resposta.concluido,resposta.pendente]);
 		return html;
 	});
 	tabela.setEvento("#tabelaConta tr","dblclick",function(){
@@ -58,8 +63,7 @@
 		else{
 			
 		}
-		
-		tabela.atualiza([tabela.mes]);
+			tabela.atualiza([tabela.mes]);
 		}
 	});
 	tabela.renderizar("main").adicionarEvento("td input","change",function(){
@@ -147,7 +151,7 @@
 			<button id="addConta">Adicionar</button>
 		`;
 	});
-	botaoAddConta.renderizar("#contas").adicionarEvento("#addConta","click",function(){
+	botaoAddConta.renderizar("main").adicionarEvento("#addConta","click",function(){
 		formCad.renderizar("body");
 		formCad.startEvent();
 	});

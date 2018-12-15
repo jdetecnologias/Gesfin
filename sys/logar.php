@@ -18,7 +18,9 @@ else{
 		$hash = md5(time().$email.$senha);
 		$insertHash = $pdo->prepare("update users set hash = ? where id = ?");
 		$insertHash->execute([$hash,$qtd["id"]]);
-		echo $hash;
+		session_start();
+		$_SESSION['hash'] = $hash;
+		header("location: ../inicio.php");
 	}
 	else{
 		echo 0;

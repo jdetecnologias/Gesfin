@@ -11,7 +11,7 @@
 					<div id="contas" class="limparFloat">
 						<h3 class="">${meses[mes-1]}</h3>
 						<table mes="${mes}" ano="" cellspacing='0' id="tabelaConta">
-							<tr><th>Descriçao</th><th>Valor</th><th>Data Vencimento</th><th>Data Pagamento</th><th>Tipo</th><th>Status</th></tr>`;
+							<tr class="cabecalho"><td>Descriçao</td><td>Valor</td><td>Data Vencimento</td><td>Data Pagamento</td><td>Tipo</td><td>Status</td></tr>`;
 		var conect = new Conectar();
 		conect.defDados("mes="+mes);
 		conect.post("./sys/contasMes.php",function(){
@@ -66,7 +66,7 @@
 			tabela.atualiza([tabela.mes]);
 		}
 	});
-	tabela.renderizar("main").adicionarEvento("td input","change",function(){
+	extrato.renderizar("main").adicionarEvento("td input","change",function(){
 		var Con = new Conectar();
 				$coluna = this.parentNode.getAttribute("coluna");
 				$item = this.value;

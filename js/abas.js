@@ -9,8 +9,4 @@
 		html += `</div>`;
 		return html;
 	});
-	abas.renderizar("main").adicionarEvento(".abaMes","click",function(){
-		var indice = abas.seletorPai.querySelector(".activeAba").getAttribute("indice");
-		abas.seletorPai.getElementsByClassName("activeAba")[0].classList.remove("activeAba");
-		tabela.atualiza([parseInt(this.getAttribute("indice"))+1]);
-	});
+	

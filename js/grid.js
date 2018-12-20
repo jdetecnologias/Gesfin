@@ -4,7 +4,8 @@
 	var tabela = new View();
 	
 	tabela.setTemplate(function(mes = (data.getMonth()+1)){
-		abas.me.children[mes-1].children[0].classList.add("activeAba");
+		//console.log("abas", abas);
+		//abas.me.children[mes-1].children[0].classList.add("activeAba");
 		tabela.mes = mes;
 		var meses = getMeses();
 		var html = `
@@ -65,18 +66,8 @@
 		}
 			tabela.atualiza([tabela.mes]);
 		}
-	});
-	extrato.renderizar("main").adicionarEvento("td input","change",function(){
-		var Con = new Conectar();
-				$coluna = this.parentNode.getAttribute("coluna");
-				$item = this.value;
-				$id = this.parentNode.parentNode.getAttribute("id");
-				Con.defDados("coluna="+$coluna+"&item="+$item+"&id="+$id);
-			Con.post("./sys/SalvarItem.php",function(){
-			});
-					tabela.atualiza([tabela.mes]);
-		
-	});
+	}); 
+
 	
 		
 	
@@ -151,7 +142,5 @@
 			<button id="addConta">Adicionar</button>
 		`;
 	});
-	botaoAddConta.renderizar("main").adicionarEvento("#addConta","click",function(){
-		formCad.renderizar("body");
-		formCad.startEvent();
-	});
+
+

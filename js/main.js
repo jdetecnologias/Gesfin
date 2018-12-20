@@ -6,4 +6,3 @@ main.setTemplate(function(){
 		</main>
 	`;
 });
-main.renderizar("#container");

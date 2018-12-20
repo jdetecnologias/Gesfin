@@ -10,15 +10,22 @@
 		return `
 			<div id="saldos" class="flutuarEsq">
 				<table>
-					<tr class="cabecalho"><td>Saldo</td><td>Total</td><td>Pendente</td><td>Concluido</td></tr>
-					<tr class="par"><td>Crédito</td><td>${BrasilSistemaDecimal(credito)}</td><td>${BrasilSistemaDecimal(credito-concluido)}</td><td>${BrasilSistemaDecimal(concluido)}</td></tr>
-					<tr ><td>Débito</td><td>${BrasilSistemaDecimal(debito)}</td><td>${BrasilSistemaDecimal(pendente)}</td><td>${BrasilSistemaDecimal(debito-pendente)}</td></tr>
-					<tr class="par"><td>Balanço</td><td>${BrasilSistemaDecimal(credito-debito)}</td><td></td><td></td></tr>
+					<tr><td>Crédito</td><td>Total</td><td>Pendente</td><td>Concluido</td></tr>
+					<tr><td>Crédito</td><td>${credito}</td><td>${(credito-concluido).toFixed(2)}</td><td>${concluido}</td></tr>
+					<tr><td>Débito</td><td>${debito}</td><td>${pendente}</td><td>${(debito-pendente).toFixed(2)}</td></tr>
+					<tr><td>Balanço</td><td>${(credito-debito).toFixed(2)}</td><td></td><td></td></tr>
 				</table>
 			</div>
 
 		`;
 	});
-	painelSaldo.renderizar("main");
+	
+	painelSaldo.defCss(function(){
+		return `
+			#saldos table tr {
+				height:40px;
+			}
+		`;
+	});
 	
 	//925,31

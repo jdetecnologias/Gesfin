@@ -7,6 +7,7 @@ function View() {
   this.fontes = [];
   this.eventos = [];
   this.me = null;
+  this.trigger = null;
 }
 
 View.prototype.setTemplate = function(fn,argumentos = null) {
@@ -65,7 +66,7 @@ View.prototype.renderizar = function(seletor, tipo = null, view = null) {
     view.renderizar(this.seletorString,false);
   }
   else{
-  if(this.indice == null){
+  if(this.indice == ne == null){
     this.appendConteudo();
   }
   else{
@@ -131,5 +132,8 @@ View.prototype.link = function(anterior){
 }
 View.prototype.cp = function(){
 	return this.getFragment();
+}
+View.prototype.defTrigger = function(fn){
+	this.trigger = fn;
 }
 

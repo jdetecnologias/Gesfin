@@ -20,10 +20,12 @@ if(isset($_SESSION["hash"])){
 <script src="./js/container.js" type="text/javascript"></script>
 <script src="./js/topo.js" type="text/javascript"></script>
 <script src="./js/main.js" type="text/javascript"></script>
-<script src="./js/painelSaldo.js" type="text/javascript"></script>
-<script charset="ISO-8859-1" src="./js/abas.js" type="text/javascript" ></script>
+<script src="./js/abas.js" type="text/javascript" ></script>
 <script src="./js/extrato.js" type="text/javascript"></script>
+<script src="./js/menus.js" type="text/javascript"></script>
+<script src="./js/painelSaldo.js" type="text/javascript"></script>
 <script src="./js/grid.js" type="text/javascript"></script>
+<script src="./js/inicio.js" type="text/javascript"></script>
 <?php 
 }
 else{

@@ -5,4 +5,3 @@ container.setTemplate(function(){
 		</div>
 	`;
 });
-container.renderizar("body");

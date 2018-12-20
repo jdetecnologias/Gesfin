@@ -4,4 +4,3 @@
 			<header>GFO - Gerenciador Financeiro Online</header>
 		`;
 	});
-	topo.renderizar("#container");

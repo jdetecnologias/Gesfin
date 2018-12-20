@@ -7,7 +7,9 @@ function View() {
   this.fontes = [];
   this.eventos = [];
   this.me = null;
+  this.css = {codigo:null,cssNode:null}
   this.trigger = null;
+  this.render = false;
 }
 
 View.prototype.setTemplate = function(fn,argumentos = null) {
@@ -27,8 +29,13 @@ View.prototype.atualizarEventos = function() {
  });   
 }
 
-View.prototype.getFragment = function() {
-  return document.createRange().createContextualFragment(this.html);
+View.prototype.getFragment = function(codigo = false) {
+	if(codigo){
+		return document.createRange().createContextualFragment(codigo);
+	}
+	else{
+		return document.createRange().createContextualFragment(this.html);
+	}
 }
 
 View.prototype.autoRenderize = function() {
@@ -66,7 +73,7 @@ View.prototype.renderizar = function(seletor, tipo = null, view = null) {
     view.renderizar(this.seletorString,false);
   }
   else{
-  if(this.indice == ne == null){
+  if(this.indice == null){
     this.appendConteudo();
   }
   else{
@@ -74,7 +81,11 @@ View.prototype.renderizar = function(seletor, tipo = null, view = null) {
   }
   }
   this.me = this.seletorPai.children[this.indice];
- 
+	if(this.trigger != null){
+		this.trigger();
+	}
+	this.render = true;
+	this.startEvent();
   return this;
 }
 
@@ -123,17 +134,40 @@ View.prototype.removerFilhosdoPai = function(){
 }
 View.prototype.atualiza = function(argumentos) {
     this.atualizaTemplate(argumentos);
-    this.renderizar(this.seletorString,null,null);
-    this.startEvent();
+	if(this.render){
+		this.renderizar(this.seletorString,null,null);
+	}
 }
 
-View.prototype.link = function(anterior){
- anterior.seletorPai.replaceChild(this.getFragment(),anterior.me);
+View.prototype.mudarConteudo = function(anterior){
+		this.indice = anterior.indice;
+		this.seletorPai = anterior.seletorPai;
+		anterior.seletorPai.replaceChild(this.getFragment(),anterior.seletorPai.children[anterior.indice]);
 }
 View.prototype.cp = function(){
 	return this.getFragment();
 }
+
+View.prototype.defCss = function(fn = false){
+	if(typeof fn == 'function'){
+		if(this.css.codigo == null){
+			this.css.codigo = fn();
+		}
+			var styles = `<style></style>`;
+		if(document.querySelector("style")){
+			document.querySelector("style").appendChild(this.getFragment(this.css.codigo));
+		}
+		else{
+			document.querySelector("head").appendChild(this.getFragment(styles));
+			this.defCss(fn);
+		}
+	}
+}
 View.prototype.defTrigger = function(fn){
 	this.trigger = fn;
+	if(this.render){
+		this.trigger();
+	}
+
 }
 

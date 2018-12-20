@@ -4,8 +4,10 @@
 	var tabela = new View();
 	
 	tabela.setTemplate(function(mes = (data.getMonth()+1)){
-		//console.log("abas", abas);
-		//abas.me.children[mes-1].children[0].classList.add("activeAba");
+		abas.defTrigger(function(){
+			abas.me.children[mes-1].children[0].classList.add("activeAba");
+		});
+		
 		tabela.mes = mes;
 		var meses = getMeses();
 		var html = `
@@ -57,6 +59,7 @@
 		conec.post("./sys/deletarLinha.php",function(){
 			
 		});
+		
 		var  resposta = conec.resposta;
 		if(resposta == 1){
 			alert("Registro deletado com sucesso");
@@ -68,7 +71,17 @@
 		}
 	}); 
 
-	
+tabela.setEvento("button","click",function(){
+	var tipo = this.getAttribute("id");
+	switch(tipo){
+		case "planilha":
+			tabela.mudarConteudo(extrato);
+		break;
+		case "Textrato":
+			extrato.mudarConteudo(tabela);
+		break;
+	}
+});	
 		
 	
 
@@ -136,11 +149,15 @@
 		formCad.me.style.display = "none";
 		}
 	});
+	
 	var botaoAddConta = new View();
 	botaoAddConta.setTemplate(function(){
 		return `
 			<button id="addConta">Adicionar</button>
 		`;
 	});
-
+botaoAddConta.setEvento("#addConta","click",function(){
+		formCad.renderizar("body");
+		formCad.startEvent();
+});
 

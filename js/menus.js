@@ -1,7 +1,7 @@
 var menuTipoExtrato = new View();
 menuTipoExtrato.setTemplate(function(){
 	return `
-		<section id="tipoExtrato" class="limparFloat">
+		<section id="tipoExtrato" class="flutuarEsq">
 			<button id="planilha" class="flutuarEsq">
 				Planilha
 			</button>
@@ -12,12 +12,22 @@ menuTipoExtrato.setTemplate(function(){
 	`;
 });
 
-
+menuTipoExtrato.setEvento("button","click",function(){
+	var tipo = this.getAttribute("id");
+	switch(tipo){
+		case "planilha":
+			tabela.mudarConteudo(extrato);
+		break;
+		case "Textrato":
+			extrato.mudarConteudo(tabela);
+		break;
+	}
+});
 
 var menuPrincipal = new View();
 menuPrincipal.setTemplate(function(){
 	return `
-		<section id="menuPrincipal">
+		<section id="menuPrincipal" class="limparFloat">
 			<div class="Pmenu">
 				<ul>
 					<li>Painel de contas</li>
@@ -33,13 +43,13 @@ menuPrincipal.setTemplate(function(){
 
 menuPrincipal.defCss(function(){
 	return `
-	
-
 		ul li {
+		
 			border-bottom:1px dotted black;
 			list-style-type:none;
 			}
 		.Pmenu{
+			height:${4*15}px;
 			width:150px;
 			font-size:12px;
 			border-right:2px solid lightblue;

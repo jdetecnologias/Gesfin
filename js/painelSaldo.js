@@ -19,7 +19,32 @@
 
 		`;
 	});
-	
+
+	painelSaldo.defCss(function(){
+		
+		
+		return `	#saldos {
+					margin-left:10px;
+					width:40%;
+					border-radius:5px;
+					border:0;
+					font-family:calibri;
+					font-size:14px;
+					font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+					font-size:12px;
+					}
+					#saldos table{
+					text-align:center;
+					border-spacing:0;
+					}
+					#saldos table td {
+					width:27%;
+					margin:0;
+					border:0;
+					}`
+				;
+				
+	});
 
 	
 	//925,31

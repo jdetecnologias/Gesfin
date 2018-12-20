@@ -32,3 +32,15 @@ extrato.setTemplate(function(despesas = null){
 	}
 	return html;
 });
+extrato.defCss(function(){
+	
+	return `
+			#extrato{
+				margin-top:50px;
+				width:40%;
+				font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+				font-fami ly: 'Trebuchet MS',Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif;
+				font-size:12px;
+			}
+	`;
+});

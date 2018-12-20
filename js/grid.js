@@ -149,7 +149,17 @@ tabela.setEvento("button","click",function(){
 		formCad.me.style.display = "none";
 		}
 	});
-	
+	tabela.defCss(function(){
+		return `
+				#contas table tr td input{
+					border:0;
+				}
+				#contas inp ut{
+					background-color:rgba(255,215,0,1); 
+				}
+		`;
+		
+	});
 	var botaoAddConta = new View();
 	botaoAddConta.setTemplate(function(){
 		return `

@@ -71,17 +71,18 @@
 		}
 	}); 
 
-tabela.setEvento("button","click",function(){
-	var tipo = this.getAttribute("id");
-	switch(tipo){
-		case "planilha":
-			tabela.mudarConteudo(extrato);
-		break;
-		case "Textrato":
-			extrato.mudarConteudo(tabela);
-		break;
-	}
-});	
+tabela.setEvento("td input","change",function(){
+		var Con = new Conectar();
+				$coluna = this.parentNode.getAttribute("coluna");
+				$item = this.value;
+				$id = this.parentNode.parentNode.getAttribute("id");
+				Con.defDados("coluna="+$coluna+"&item="+$item+"&id="+$id);
+			Con.post("./sys/SalvarItem.php",function(){
+			});
+			console.log(Con.resposta);
+					tabela.atualiza([tabela.mes]);
+		
+	});
 		
 	
 

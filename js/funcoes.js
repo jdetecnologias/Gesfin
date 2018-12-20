@@ -11,7 +11,7 @@
 	}
 	
 function BrasilSistemaDecimal(valor){
-	console.log(valor, typeof valor)
+	
 	if(valor && typeof valor == "number"){
 		return "R$ "+valor.toFixed(2).replace(".",",");
 	}

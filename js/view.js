@@ -1,4 +1,5 @@
 function View() {
+	this.indice = null;
   this.template = null;
   this.seletorString = null;
   this.seletorPai = null;
@@ -60,6 +61,7 @@ View.prototype.getSeletor = function(seletor) {
 }
 
 View.prototype.renderizar = function(seletor, tipo = null, view = null) {
+	console.log(this);
   var sel;
  if(typeof seletor === 'string'){
     sel = this.setSeletor(seletor);

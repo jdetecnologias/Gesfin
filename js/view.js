@@ -143,6 +143,7 @@ View.prototype.mudarConteudo = function(anterior){
 		this.indice = anterior.indice;
 		this.seletorPai = anterior.seletorPai;
 		anterior.seletorPai.replaceChild(this.getFragment(),anterior.seletorPai.children[anterior.indice]);
+		this.startEvent();
 }
 View.prototype.cp = function(){
 	return this.getFragment();
@@ -168,6 +169,28 @@ View.prototype.defTrigger = function(fn){
 	if(this.render){
 		this.trigger();
 	}
+
+}
+
+View.prototype.$ = function(string){
+
+		if(this.me){
+			console.log("me");
+			var ele = this.me.querySelectorAll(string);
+		}
+		else{
+			console.log("document");
+			var ele = document.querySelectorAll(string);
+		}
+		if(ele.length > 1){
+			return ele;
+		}
+		else if(ele.length == 1){
+			return ele[0];
+		}
+		else{
+			return false;
+		}
 
 }
 

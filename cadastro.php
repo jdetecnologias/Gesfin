@@ -14,6 +14,7 @@
 <script src="./js/view.js" type="text/javascript"></script>
 <script src="./js/conectar.js" type="text/javascript"></script>
 <script src="./js/container.js" type="text/javascript"></script>
+<script src="./js/cadastro.js" type="text/javascript"></script>
 <script>
 	var boxCadastro = new View();
 	boxCadastro.setTemplate(function(){

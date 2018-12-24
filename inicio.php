@@ -8,6 +8,7 @@ if(isset($_SESSION["hash"])){
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html dir="ltr" lang="pt-BR">
 <head><meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<meta name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="./css/style.css"/>
 <title><?php echo $_SESSION["titulo"];?></title>
 </head>
@@ -24,7 +25,9 @@ if(isset($_SESSION["hash"])){
 <script src="./js/extrato.js" type="text/javascript"></script>
 <script src="./js/menus.js" type="text/javascript"></script>
 <script src="./js/painelSaldo.js" type="text/javascript"></script>
+<script src="./js/seletorMes.js" type="text/javascript"></script>
 <script src="./js/grid.js" type="text/javascript"></script>
+<script src="./js/avulsos.js" type="text/javascript"></script>
 <script src="./js/inicio.js" type="text/javascript"></script>
 <?php 
 }

@@ -37,7 +37,7 @@ Conectar.prototype.abrirCon = function(url,functionCallback){
 }
 
 Conectar.prototype.PegarDadosFormulario = function(elemento){
-	var elForm = ["input","select"];
+	var elForm = ["input","select","textarea"];
 	var qtdFilhos = elemento.children.length;
 	for(var i = 0; i<qtdFilhos; i++){
 		

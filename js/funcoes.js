@@ -20,3 +20,23 @@ function BrasilSistemaDecimal(valor){
 		return valor;
 	}
 }
+
+function $(string){
+
+			var ele = document.querySelectorAll(string);
+	
+		if(ele.length > 1){
+			return ele;
+		}
+		else if(ele.length == 1){
+			return ele[0];
+		}
+		else{
+			return false;
+		}
+}
+
+function fazer(string){
+	var elementos = $(string);
+	return elementos;
+}

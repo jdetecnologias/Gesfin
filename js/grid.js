@@ -13,8 +13,8 @@
 		var html = `
 					<div id="contas" class="limparFloat">
 						<h3 class="">${meses[mes-1]}</h3>
-						<table mes="${mes}" ano="" cellspacing='0' id="tabelaConta">
-							<tr class="cabecalho"><td>Descriçao</td><td>Valor</td><td>Data Vencimento</td><td>Data Pagamento</td><td>Tipo</td><td>Status</td></tr>`;
+						<table mes="${mes}" ano="" cellspacing='0' id="tabelaConta" class="table-responsive">
+							`;
 		var conect = new Conectar();
 		conect.defDados("mes="+mes);
 		conect.post("./sys/contasMes.php",function(){
@@ -33,23 +33,37 @@
 				if(indice%2 ==0){
 					classe="par";
 				}
-				html += ` <tr class="${classe}"id='${itm.id}'>\n
-				<td coluna='descricao'>	<input type='text'  value='${itm.descricao}' />	</td>\n
-				<td coluna='valor'>			<input type='text'  value='${itm.valor}' />		</td>\n
-				<td coluna='data_venc'>	<input type='date'  value='${itm.data_venc}' />	</td>\n
-				<td coluna='data_pgto'><input type='date'  value='${itm.data_pgto}' />	</td>
-				<td coluna='tipo'>${itm.tipo}</td>
-				<td coluna='tipo'>${itm.status}</td>
-				</tr>`;
+				html += `
+								<table class="${classe} linha" id='${itm.id}'>
+									<tr>
+										<td class="">dt. venc</td>\n
+										<td class="">dt. pagto</td>
+										<td coluna='tipo' class="tipo">${itm.tipo}</td>
+									</tr>
+									<tr>
+										<td coluna='data_venc'>	<input type='date'  value='${itm.data_venc}' />	</td>\n
+										<td coluna='data_pgto'><input type='date'  value='${itm.data_pgto}' />	</td>
+										<td coluna='status'>${itm.status}</td>
+									</tr>
+									<tr>
+										
+										<td coluna='descricao' class="desc" colspan=2><input type='text'  value='${itm.descricao}' />	</td>\n
+										<td coluna='valor' class="vl"><input type='text'  value='${itm.valor}' />		</td>\n
+										
+									</tr>
+								</table>
+							`;
 			});
 		}
-		html += `</table>
+		html += `
+	
+		</table>
 		</div>
 		`;
 		painelSaldo.atualiza([resposta.credito,resposta.debito, resposta.concluido,resposta.pendente]);
 		return html;
 	});
-	tabela.setEvento("#tabelaConta tr","dblclick",function(){
+	tabela.setEvento(".linha","dblclick",function(){
 		var resp = confirm("Deseja realmente excluir registro?");
 		if(resp){
 			var id = this.getAttribute("id");
@@ -75,7 +89,7 @@ tabela.setEvento("td input","change",function(){
 		var Con = new Conectar();
 				$coluna = this.parentNode.getAttribute("coluna");
 				$item = this.value;
-				$id = this.parentNode.parentNode.getAttribute("id");
+				$id = this.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
 				Con.defDados("coluna="+$coluna+"&item="+$item+"&id="+$id);
 			Con.post("./sys/SalvarItem.php",function(){
 			});
@@ -152,12 +166,22 @@ tabela.setEvento("td input","change",function(){
 	});
 	tabela.defCss(function(){
 		return `
+				#contas  {
+					overflow-x:auto;
+					margin-left:10px;
+				}
+				.vl input{
+					width:70px;
+				}
+		
 				#contas table tr td input{
+					
 					border:0;
 				}
-				#contas inp ut{
-					background-color:rgba(255,215,0,1); 
-				}
+			
+				#contas {
+					font-family:calibri,sans-serif;
+				}	
 		`;
 		
 	});

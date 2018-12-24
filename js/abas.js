@@ -13,5 +13,15 @@
 		var indice = abas.seletorPai.querySelector(".activeAba").getAttribute("indice");
 		abas.seletorPai.getElementsByClassName("activeAba")[0].classList.remove("activeAba");
 		tabela.atualiza([parseInt(this.getAttribute("indice"))+1]);
-	})
+	});
+	abas.defCss(function(){
+		return `
+			@media screen and (max-width:640px){
+				#abas{
+					display:none;
+				}
+			}
+			
+		`;
+	});
 	

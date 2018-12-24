@@ -49,11 +49,13 @@ var menuPrincipal = new View();
 menuPrincipal.setTemplate(function(){
 	return `
 		<section id="menuPrincipal" class="limparFloat">
+			
 			<div class="Pmenu">
 				<ul>
-					<li>Painel de contas</li>
+					<li"><a href="inicio.php">Painel de contas</a></li>
 					<li>Extrato</li>
-					<li>Lançamento de despesas e proventos</li>
+					<li><a href="lancamentos.php">Lançamento de despesas e proventos</a></li>
+					<li><a href="inicio.php">Lançar avulsos</a></li>
 					<li>Bancos</li>
 					
 				</ul>
@@ -61,9 +63,12 @@ menuPrincipal.setTemplate(function(){
 		</section>
 	`;
 });
-
 menuPrincipal.defCss(function(){
 	return `
+	@media screen and (min-width:641px){
+			.hamb{
+				display:none;
+			}
 		#menuPrincipal{
 			height:200px;
 			width:100%;
@@ -79,6 +84,48 @@ menuPrincipal.defCss(function(){
 			font-size:12px;
 			border-right:2px solid lightblue;
 		}
+	}
+	@media screen and (max-width:640px){
+			body,container{
+				width:100%;
+			}
+			.hamb{
+				display:block;
+				height:30px;
+				width:30px;
+			}
+		#menuPrincipal{
+			display:none;
+			background-color:rgba(255,165,0,1);
+			top:20px;
+			width:70%;
+			height:100%;
+			position:absolute;
+
+		}
+		main{
+			width:100%;
+		}
+		ul li {
+			cursor:pointer;
+			font-family:sans-serif;
+			font-weight:500;
+			text-align:center;
+			line-height:35px;
+			width:100%;
+			border:1px solid white;
+			list-style-type:none;
+			min-height:35px;
+			}
+		.Pmenu{
+			
+			height:100%;
+			width:100%;
+			position:absolute;
+			font-size:20px;
+			border-right:2px solid lightblue;
+		}
+	}
 	`;
 	
 });

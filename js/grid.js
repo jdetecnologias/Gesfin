@@ -108,7 +108,7 @@ tabela.setEvento("td input","change",function(){
 			<section id="form">
 			<div id="ControleFormSaldo"><button class="fecharJan">Fechar</button></div>
 				<fieldset>
-					<label>DescriÃ§Ã£o</label>
+					<label>Descrição</label>
 					<input type="text" name="desc" id="descSaldo"/>
 				</fieldset>
 				<fieldset>
@@ -167,20 +167,24 @@ tabela.setEvento("td input","change",function(){
 	tabela.defCss(function(){
 		return `
 				#contas  {
+						height:500px;
+				overflow-y:auto;
+					font-family:calibri,sans-serif;
 					overflow-x:auto;
 					margin-left:10px;
 				}
+			
 				.vl input{
 					width:70px;
 				}
-		
+				
 				#contas table tr td input{
 					
 					border:0;
 				}
 			
-				#contas {
-					font-family:calibri,sans-serif;
+				.table-responsive{
+			;
 				}	
 		`;
 		

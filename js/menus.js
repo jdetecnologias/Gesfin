@@ -55,7 +55,7 @@ menuPrincipal.setTemplate(function(){
 					<li"><a href="inicio.php">Painel de contas</a></li>
 					<li>Extrato</li>
 					<li><a href="lancamentos.php">Lançamento de despesas e proventos</a></li>
-					<li><a href="inicio.php">Lançar avulsos</a></li>
+					<li><a href="avulsos.php">Lançar avulsos</a></li>
 					<li>Bancos</li>
 					
 				</ul>

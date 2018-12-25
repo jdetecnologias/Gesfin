@@ -8,7 +8,7 @@
 		x++;
 	}
 		return `
-			<div id="saldos">
+			<div id="saldos" class="limparFloat">
 				<table>
 					<tr class="cabecalho"><td>Crédito</td><td>Total</td><td>Pendente</td><td>Concluido</td></tr>
 					<tr class="par"><td>Crédito</td><td>${BrasilSistemaDecimal(credito)}</td><td>${BrasilSistemaDecimal((credito-concluido))}</td><td>${BrasilSistemaDecimal(concluido)}</td></tr>
@@ -25,17 +25,30 @@
 		
 		return `	#saldos {
 					margin-top:40px;
-					margin-left:3%;
+					
 					width:100%;
-					border-radius:5px;
 					border:0;					
 					font-family: Calibri, sans-serif;
-					
 					}
+					@media screen and (max-width:640px){
 					#saldos table{
+						padding-top:5px;
+						margin-left:3%;
+						margin-right:3%;
 						width:94%;
-					text-align:center;
-					border-spacing:0;
+						text-align:center;
+						border-spacing:0;
+						}
+					}
+					@media screen and (min-width:641px){
+					#saldos table{
+						padding-top:5px;
+						margin-left:3%;
+						margin-right:3%;
+						width:30%;
+						text-align:center;
+						border-spacing:0;
+						}
 					}
 					#saldos table td {
 					margin:0;

@@ -1,7 +1,7 @@
 var avulsos = new View();
 avulsos.setTemplate(function(){
 	return `
-		<div id="lancarAvulsos">
+		<div id="lancarAvulsos" class="limparFloat">
 			<form name="avulso" method="post" action="./sys/avulsos.php">
 				<fieldset>
 					<label for="desc">Descrição</label>
@@ -36,6 +36,7 @@ avulsos.defCss(function(){
 		}
 		@media screen and (max-width: 640px){
 		#lancarAvulsos{
+			display:block;
 			width:100%;
 			height:50%;
 		

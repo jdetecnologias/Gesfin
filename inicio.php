@@ -31,6 +31,7 @@ if(isset($_SESSION["hash"])){
 
 <script src="./js/inicio.js" type="text/javascript"></script>
 <?php 
+	echo $_SESSION['hash'];
 }
 else{
 	header("location:./index.php");

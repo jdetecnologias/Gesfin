@@ -80,7 +80,7 @@ menuPrincipal.defCss(function(){
 			display:none;
 			background-color:rgba(255,165,0,1);
 			top:50px;
-			width:40%;
+			width:30%;
 			height:100%;
 			position:absolute;
 

@@ -67,30 +67,42 @@ menuPrincipal.setTemplate(function(){
 menuPrincipal.defCss(function(){
 	return `
 	@media screen and (min-width:641px){
+
 			.hamb{
-				display:none;
+				display:block;
+				height:30px;
+				width:30px;
+
 			}
 		#menuPrincipal{
-			height:35px;
-			width:100%;
+			z-index:99;
+			overflow:hidden;
+			display:none;
+			background-color:rgba(255,165,0,1);
+			top:50px;
+			width:40%;
+			height:100%;
+			position:absolute;
+
 		}
 
 		ul li {
-			float:left;
 			cursor:pointer;
 			font-family:sans-serif;
 			font-weight:500;
 			padding-left:20px;
 			line-height:35px;
-			width:100px;
+			width:94%;
 			border:1px solid white;
 			list-style-type:none;
 			min-height:35px;
 			}
 		.Pmenu{
 			
+			height:100%;
 			width:100%;
-			font-size:12px;
+			position:absolute;
+			font-size:20px;
 			border-right:2px solid lightblue;
 		}
 	}

@@ -23,13 +23,13 @@ a{
 	.center{text-align:center;}
 	.abaMes{
 		float:left;
-		width:80px;
+		width:8%;
 		height:30px;
 		line-height:30px;
 		text-align:center;
 		font-family:arial;
 		font-size:12px;
-		margin:1px 0 0 1px;
+		margin:0.15% 0 0 0.15%;
 		border-radius:5px 5px 0 0;
 		background-color:rgb(255,165,0);
 		font-weight:900;

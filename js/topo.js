@@ -2,8 +2,9 @@
 	topo.setTemplate(function(){
 		return `
 			<header class="limparFloat">
-				<span class="hamb flutuarEsq fas fa-bars center"></span>
+				<span id="hambMenu" class="hamb flutuarEsq fas fa-bars center"></span>
 				<div id="logo" class="flutuarEsq center">GFO</div>
+				<a href="./sys/logout.php"><i id="sair" class="flutuarEsq fas fa-sign-out-alt"></i></a>
 			</header>
 		`;
 	});
@@ -20,20 +21,37 @@ topo.setEvento("span.hamb","click",function(){
 });
 topo.defCss(function(){
 	return `
+	
+		i#sair{
+			position:absolute;
+			right:5px;
+			line-height:50px;
+			font-size:30px;
+		}
+		header a{
+			color:white;
+
+		}
 		header{
 			color:white;
 			line-height:50px;
 			height:50px;
 			background-color:red;
+			font-family:calibri,sans-serif;
+			font-weight:800;
+			font-size:30px;
 		}
-		header span {
-			padding:15px;
-			font-size:18px;
+		header span#hambMenu {
+			position:absolute;
+			left:5px;
+			line-height:50px;
+			font-size:30px;
 			color:white;
 			
 		}
 		header #logo {
-			width:50%;
+			width:100%;
+		
 		}
 	`;
 });

@@ -1,23 +1,22 @@
 *{margin:0;padding:0}
-#box-login  fieldset{
-	text-alig n:center;
-	width:200px;
+.bto{
+	padding:5px;
 	border:0;
 }
-#box-login  fieldset{
-	width:200px;
-	border:0;
+a{
+	text-decoration:none;
 }
-
-#box-login{
-	position:absolute;
-	left:50%;
-	top:50%;
-	border:1px solid blue;
-	width:230px;
-	transform: translate(-50%,-50%);
+.bto-pq{
+	width:80px;
 }
-
+.centralizar{
+	width:50%;!important
+	margin-left:25%;
+}
+.primaria{
+	background-color:#0078d7;
+	color:#fff;
+}
 	.activeAba{
 		transform: scaleY(1.1);
 		}

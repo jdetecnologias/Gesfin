@@ -10,6 +10,7 @@ if(isset($_SESSION["hash"])){
 <head><meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+<link href="./fa/css/all.css" rel="stylesheet">
 <title><?php echo $_SESSION["titulo"];?></title>
 </head>
 <body>

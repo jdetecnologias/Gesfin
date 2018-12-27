@@ -35,16 +35,17 @@ avulsos.defCss(function(){
 			height:40px;
 		}
 		@media screen and (max-width: 640px){
-		#lancarAvulsos{
-			display:block;
-			width:100%;
-			height:50%;
-		
-		}
+			#lancarAvulsos{
+				display:block;
+				margin-left:10%;
+				width:80%;
+				height:50%;
+			}
 		}
 		@media screen and (min-width: 641px){
 		#lancarAvulsos{
-			width:20%;
+			margin-left:25%;
+			width:50%;
 			height:50%;
 		
 		}
@@ -58,6 +59,7 @@ avulsos.setEvento("button[type=submit]","click",function(e){
 	con.post("./sys/avulsos.php",function(){
 		if(con.resposta == 1){
 			alert("Dados Salvo com sucesso!");
+			avulsos.atualiza();
 		}
 		else{
 			alert("Dados não foram salvos!")

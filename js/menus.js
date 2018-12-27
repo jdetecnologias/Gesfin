@@ -52,9 +52,10 @@ menuPrincipal.setTemplate(function(){
 			
 			<div class="Pmenu">
 				<ul>
-					<li"><a href="inicio.php">Painel de contas</a></li>
+					<li class="center">Menu</li>
+					<li><a href="inicio.php">Painel de contas</a></li>
 					<li>Extrato</li>
-					<li><a href="lancamentos.php">Lançamento de despesas e proventos</a></li>
+				
 					<li><a href="avulsos.php">Lançar avulsos</a></li>
 					<li>Bancos</li>
 					
@@ -70,17 +71,25 @@ menuPrincipal.defCss(function(){
 				display:none;
 			}
 		#menuPrincipal{
-			height:200px;
+			height:35px;
 			width:100%;
 		}
+
 		ul li {
-			min-height:15px;
-			border-bottom:1px dotted black;
+			float:left;
+			cursor:pointer;
+			font-family:sans-serif;
+			font-weight:500;
+			padding-left:20px;
+			line-height:35px;
+			width:100px;
+			border:1px solid white;
 			list-style-type:none;
+			min-height:35px;
 			}
 		.Pmenu{
-			height:${75}px;
-			width:150px;
+			
+			width:100%;
 			font-size:12px;
 			border-right:2px solid lightblue;
 		}
@@ -93,12 +102,13 @@ menuPrincipal.defCss(function(){
 				display:block;
 				height:30px;
 				width:30px;
+
 			}
 		#menuPrincipal{
 			display:none;
-			background-color:rgba(255,165,0,1);
-			top:20px;
-			width:70%;
+			background-color:rgba(255,165,0,0.8);
+			top:50px;
+			width:90%;
 			height:100%;
 			position:absolute;
 
@@ -110,9 +120,9 @@ menuPrincipal.defCss(function(){
 			cursor:pointer;
 			font-family:sans-serif;
 			font-weight:500;
-			text-align:center;
+			padding-left:20px;
 			line-height:35px;
-			width:100%;
+			width:94%;
 			border:1px solid white;
 			list-style-type:none;
 			min-height:35px;

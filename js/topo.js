@@ -2,13 +2,13 @@
 	topo.setTemplate(function(){
 		return `
 			<header class="limparFloat">
-				<button class="hamb flutuarEsq">Menu</button>
-				<div id="logo" class="flutuarEsq center">GFO - Gerenciador Financeiro Online</div>
+				<span class="hamb flutuarEsq fas fa-bars center"></span>
+				<div id="logo" class="flutuarEsq center">GFO</div>
 			</header>
 		`;
 	});
-	
-topo.setEvento("button","click",function(){
+	//op
+topo.setEvento("span.hamb","click",function(){
 	var MenuPrincipal = document.querySelector("#menuPrincipal");
 	var p = getComputedStyle(MenuPrincipal).display
 	if(p == "none"){
@@ -17,5 +17,24 @@ topo.setEvento("button","click",function(){
 	else if(p == "block"){
 		MenuPrincipal.style.display = "none";
 	}
+});
+topo.defCss(function(){
+	return `
+		header{
+			color:white;
+			line-height:50px;
+			height:50px;
+			background-color:red;
+		}
+		header span {
+			padding:15px;
+			font-size:18px;
+			color:white;
+			
+		}
+		header #logo {
+			width:50%;
+		}
+	`;
 });
 

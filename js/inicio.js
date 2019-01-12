@@ -5,7 +5,7 @@ menuPrincipal.renderizar("#container");
 main.renderizar("#container");
 
 abas.renderizar("main");
-control.renderizar("main");
+
 painelSaldo.renderizar("main");
 //menuTipoExtrato.renderizar("main");
 seletor.renderizar("main");

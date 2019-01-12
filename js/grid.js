@@ -36,7 +36,7 @@
 				html += `
 								<table class="${classe} linha" id='${itm.id}'>
 									<tr>
-										<td class="">dt. venc</td>\n
+										<td class="data_vencSaldo">dt. venc</td>\n
 										<td class="">dt. pagto</td>
 										<td coluna='tipo' class="tipo">${itm.tipo}</td>
 									</tr>
@@ -64,26 +64,18 @@
 		return html;
 	});
 	tabela.setEvento(".linha","dblclick",function(){
-		var resp = confirm("Deseja realmente excluir registro?");
-		if(resp){
-			var id = this.getAttribute("id");
-			var conec = new Conectar();
-			conec.defDados("id="+id);
-			
-		conec.post("./sys/deletarLinha.php",function(){
-			
-		});
-		
-		var  resposta = conec.resposta;
-		if(resposta == 1){
-			alert("Registro deletado com sucesso");
+		var id = this.getAttribute("id");
+		control.atualizaTemplate([id]);
+		control.renderizar("main");
+	}); 
+		tabela.setEvento(".linha","click",function(){
+		if(this.classList.contains("selected")){
+			this.classList.remove("selected");
 		}
 		else{
-			
+			this.classList.add("selected");
 		}
-			tabela.atualiza([tabela.mes]);
-		}
-	}); 
+	});
 
 tabela.setEvento("td input","change",function(){
 		var Con = new Conectar();

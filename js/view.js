@@ -11,6 +11,15 @@ function View() {
   this.css = {codigo:null,cssNode:null}
   this.trigger = null;
   this.render = false;
+  this.telas  = {
+					atual:0,
+					telas:[],
+					go: 		function(view){
+					view.telas.atual += 1;
+					console.log(view);
+					view.seletorPai.replaceChild(view.telas.telas[(view.telas.atual-1)].getFragment(),view.seletorPai.children[view.indice]);
+					}
+				};
 }
 
 View.prototype.setTemplate = function(fn,argumentos = null) {
@@ -148,7 +157,7 @@ View.prototype.mudarConteudo = function(anterior){
 		this.startEvent();
 }
 View.prototype.cp = function(){
-	return this.getFragment();
+	return this.html();
 }
 
 View.prototype.defCss = function(fn = false){
@@ -194,5 +203,19 @@ View.prototype.$ = function(string){
 			return false;
 		}
 
+}
+
+View.prototype.remover = function(){
+	if(this.me){
+		this.me.remove();	
+	}
+}
+
+View.prototype.tela = function(fn) {
+	var tela = new View(); 
+	tela.setTemplate(fn);	
+	this.telas.telas.push(tela);
+
+	
 }
 

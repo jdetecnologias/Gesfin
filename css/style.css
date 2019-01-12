@@ -3,6 +3,12 @@
 	padding:5px;
 	border:0;
 }
+.selected{
+	opacity:0.5;
+}
+.selected input{
+	
+}
 a{
 	text-decoration:none;
 }

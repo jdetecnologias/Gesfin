@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^Gesfin\/([a-z]+)\/([a-z]+)\/([0-9]+)$ Gesfin/novophp.php?action=$1&model=$2&id=$3 [NC,L,QSA]
+</IfModule>

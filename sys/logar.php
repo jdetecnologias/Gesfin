@@ -13,6 +13,7 @@ else{
 	$log = $pdo->prepare($sql);
 	$log->execute([$email,$senha]);
 	$qtd = $log->fetch();
+
 	
 	if($qtd["qtd"] > 0){
 		$hash = md5(time().$email.$senha);
@@ -20,6 +21,7 @@ else{
 		$insertHash->execute([$hash,$qtd["id"]]);
 		session_start();
 		$_SESSION['hash'] = $hash;
+		$_SESSION['id'] = $qtd["id"];
 		header("location: ../inicio.php");
 	}
 	else{

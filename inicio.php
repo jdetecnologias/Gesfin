@@ -28,10 +28,10 @@ if(isset($_SESSION["hash"])){
 <script src="./js/painelSaldo.js" type="text/javascript"></script>
 <script src="./js/seletorMes.js" type="text/javascript"></script>
 <script src="./js/grid.js" type="text/javascript"></script>
-
+<script src="./js/controles.js" type="text/javascript"></script>
 <script src="./js/inicio.js" type="text/javascript"></script>
 <?php 
-	echo $_SESSION['hash'];
+	echo $_SESSION['id'];
 }
 else{
 	header("location:./index.php");

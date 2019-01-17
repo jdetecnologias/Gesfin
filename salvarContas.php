@@ -12,7 +12,7 @@ $mes = $dataEx[1];
 $ano = $dataEx[0];
 $sqlite = "sqlite:./data/ges.db";
 $pdo = new PDO($sqlite);
-var_dump($pdo);
+
 $insert = "INSERT INTO contas (descricao, valor,tipo,data_venc,mes,ano,user) 
                 VALUES (:desc, :vl, :tp,:venc, :mes, :ano, :id)";
 $in = $pdo->prepare($insert);

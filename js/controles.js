@@ -1,22 +1,40 @@
 var control = new View();
-
-control.tela(function(){
+var mesAno = new View();
+mesAno.setTemplate(function(){
+				var meses = getMeses();
+				
+				var option = "<option>Mês</option>";
+				meses.map((itm,indice)=>{
+						option += `<option value="${indice+1}">${itm}</optiom>`;	
+				});
+	
 	return `<section id="controles" class="limparFloat">
-				<select>
-					<option>Janeiro</option>
+				<fieldset>
+				<select id="mesRep" name="mes">
+					
+					${option}
+					
+					
 				</select>
-				<select>
-					<option>2019</option>
+				<select id="anoRep" name="ano">
+					<option value=2019>2019</option>
 				</select>
+				</fieldset>
+				<fieldset>
+				<button id="confirmar">Confirmar</button>
+				</fieldset>
+				
+				
 			</section>`;
 });
+control.tela(mesAno);
 control.setTemplate(function(id = 0){
 	return `
 		<section id="controles" class="limparFloat">
 			<ul>
 				<li>Código Conta ${id}</li>
-				<li>Transferir conta</li>
-				<li id="replicarContas">replicar conta <select><option>vfg</option></select> </li>
+				<li id="transferirConta">Transferir conta</li>
+				<li id="replicarContas">replicar conta</li>
 				<li id="excluirConta" codigo="${id}">Excluir contas</li>
 			</ul>
 		</section>
@@ -25,18 +43,8 @@ control.setTemplate(function(id = 0){
 });
 
 control.setEvento("#replicarContas","click",function(){
-	control.telas.go(control);
-/*	var selected = main.$(".selected");
-	var arr = [];
-	var cd;
-	if(selected){
-		for(var i = 0; i<selected.length;i++){
-				cd = selected[i].getAttribute("id");
-				arr.push({codigo:cd});
-		}
-	}
-	console.log(arr);*/
-	
+	control.tipo = "replicar";
+	control.telas.go(control);	
 });
 control.setEvento("#excluirConta","click",function(){
 		var resp = confirm("Deseja realmente excluir registro?");
@@ -64,6 +72,9 @@ control.setEvento("#excluirConta","click",function(){
 });
 control.defCss(function(){
 	return `
+	#controles fieldset{
+		border:0;
+	}
 		@media screen and (max-width:640px){
 			section#controles{
 			
@@ -94,4 +105,42 @@ control.defCss(function(){
 			}
 		
 		`;
+});
+
+control.setEvento("#confirmar","click",function(){
+	var selected = main.$(".selected");
+	var mes = mesAno.$("#mesRep").value;
+	var ano = mesAno.$("#anoRep").value;
+	var arr = [];
+	var cd;
+	if(selected){
+		if(selected.length == undefined){
+			cd = selected.getAttribute("id");
+			arr.push({codigo:cd,mes:mes,ano:ano});
+		}
+		else{
+				
+			for(var i = 0; i<selected.length;i++){
+				cd = selected[i].getAttribute("id");
+				arr.push({codigo:cd,mes:mes,ano:ano});
+			}
+		}
+		var conn = new Conectar();
+		arr = JSON.stringify(arr);
+		conn.defDados("data="+arr+"&tipo="+control.tipo);
+		conn.post("./sys/transferirReplicar.php",function(){
+			console.log(conn);
+			if(conn.resposta == "1"){
+				alert("Contas transferidas com sucesso");
+			}
+			else{
+				alert("Erro ao replicar contas");
+			}
+		});
+	}
+});
+
+control.setEvento("#transferirConta","click",function(){
+	control.tipo = "transferir";
+	control.telas.go(control);
 });

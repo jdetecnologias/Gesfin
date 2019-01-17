@@ -56,13 +56,16 @@ menuPrincipal.setTemplate(function(){
 					<li><a href="inicio.php">Painel de contas</a></li>
 					<li>Extrato</li>
 				
-					<li><a href="avulsos.php">Lançar avulsos</a></li>
+					<li id="avulsos"><a href="#">Lançar avulsos</a></li>
 					<li>Bancos</li>
 					
 				</ul>
 			</div>
 		</section>
 	`;
+});
+menuPrincipal.setEvento("#avulsos","click",function(){
+	main.telas.go(main);
 });
 menuPrincipal.defCss(function(){
 	return `

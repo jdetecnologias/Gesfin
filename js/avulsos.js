@@ -66,8 +66,8 @@ avulsos.setEvento("button[type=submit]","click",function(e){
 		}
 	});
 });
-container.renderizar("body");
+/*container.renderizar("body");
 topo.renderizar("#container");
 menuPrincipal.renderizar("#container");
 main.renderizar("#container");
-avulsos.renderizar("main");
+avulsos.renderizar("main");*/

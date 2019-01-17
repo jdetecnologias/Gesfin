@@ -1,4 +1,5 @@
 function View() {
+ this.nome = null;
 	this.indice = null;
   this.template = null;
   this.seletorString = null;
@@ -16,8 +17,9 @@ function View() {
 					telas:[],
 					go: 		function(view){
 					view.telas.atual += 1;
-					console.log(view);
+				
 					view.seletorPai.replaceChild(view.telas.telas[(view.telas.atual-1)].getFragment(),view.seletorPai.children[view.indice]);
+					view.startEvent();
 					}
 				};
 }
@@ -70,7 +72,7 @@ View.prototype.getSeletor = function(seletor) {
 }
 
 View.prototype.renderizar = function(seletor, tipo = null, view = null) {
-	console.log(this);
+	
   var sel;
  if(typeof seletor === 'string'){
     sel = this.setSeletor(seletor);
@@ -122,7 +124,9 @@ View.prototype.adicionarEvento = function(element, evento, fn) { // adiciona eve
   if (typeof fn == "function") {    
     var objectEvent = {el:element,evento:evento,func:fn};
     this.eventos.push(objectEvent);
-    this.startEvent();
+	if(this.render){
+		this.startEvent();
+	}
   }
 }
 
@@ -186,11 +190,11 @@ View.prototype.defTrigger = function(fn){
 View.prototype.$ = function(string){
 
 		if(this.me){
-			console.log("me");
+			
 			var ele = this.me.querySelectorAll(string);
 		}
 		else{
-			console.log("document");
+		
 			var ele = document.querySelectorAll(string);
 		}
 		if(ele.length > 1){
@@ -211,10 +215,28 @@ View.prototype.remover = function(){
 	}
 }
 
-View.prototype.tela = function(fn) {
+View.prototype.tela = function(fn,nome) {
+	var name;
+	if(nome == null){
+		name = (this.telas.telas.length+1);
+	}
+	else{
+		name = nome;
+	}
+	
+	
+	if(typeof fn == "function"){
+		
 	var tela = new View(); 
-	tela.setTemplate(fn);	
+	tela.setTemplate(fn);
+	tela.nome = name;
 	this.telas.telas.push(tela);
+	}
+	else if(typeof fn == "object"){
+		
+		fn.nome = name;
+		this.telas.telas.push(fn);
+	}
 
 	
 }

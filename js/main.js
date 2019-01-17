@@ -6,3 +6,5 @@ main.setTemplate(function(){
 		</main>
 	`;
 });
+
+main.tela(avulsos);

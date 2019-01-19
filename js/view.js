@@ -17,7 +17,6 @@ function View() {
 					telas:[],
 					go: 		function(view){
 					view.telas.atual += 1;
-				
 					view.seletorPai.replaceChild(view.telas.telas[(view.telas.atual-1)].getFragment(),view.seletorPai.children[view.indice]);
 					view.startEvent();
 					}
@@ -138,6 +137,7 @@ View.prototype.setEvento = function(element, evento, fn) { // adiciona evento ma
 }
 
 View.prototype.atualizaTemplate = function(argumentos) {
+	this.telas.atual = 0;
     this.setTemplate(this.geradorView,argumentos);
 }
 View.prototype.removerFilhosdoPai = function(){
@@ -238,6 +238,45 @@ View.prototype.tela = function(fn,nome) {
 		this.telas.telas.push(fn);
 	}
 
+	
+}
+View.prototype.verify = function(lista,compare){
+		_that = this;
+		sucess = 0;
+		if(lista){
+			
+			lista.forEach(itm=>{
+				if(itm.hasChildNodes()){
+					_that.verify(itm.childNodes,compare);
+				}
+				console.log(itm,compare);
+				if(itm == compare){
+					sucess++;
+				}
+				else{
+					
+				}
+				
+				
+			});
+			
+		}
+		return sucess;
+}
+View.prototype.FecharComponente = function(_that = this){
+
+	document.addEventListener("click",function(e){
+		if(_that.render){
+			var a = _that.verify(_that.me.childNodes,e.target);
+			console.log(a);
+			if(e.target == _that.me){
+				
+			}
+			else{
+				_that.me.style.display = "none";
+			}
+		}
+	});
 	
 }
 

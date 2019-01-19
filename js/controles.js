@@ -5,7 +5,7 @@ mesAno.setTemplate(function(){
 				
 				var option = "<option>Mês</option>";
 				meses.map((itm,indice)=>{
-						option += `<option value="${indice+1}">${itm}</optiom>`;	
+						option += `<option value="${indice+1}">${itm}</option>`;	
 				});
 	
 	return `<section id="controles" class="limparFloat">
@@ -129,7 +129,6 @@ control.setEvento("#confirmar","click",function(){
 		arr = JSON.stringify(arr);
 		conn.defDados("data="+arr+"&tipo="+control.tipo);
 		conn.post("./sys/transferirReplicar.php",function(){
-			console.log(conn);
 			if(conn.resposta == "1"){
 				alert("Contas transferidas com sucesso");
 			}
@@ -137,6 +136,7 @@ control.setEvento("#confirmar","click",function(){
 				alert("Erro ao replicar contas");
 			}
 		});
+		control.me.style.display = "none";
 	}
 });
 
@@ -144,3 +144,5 @@ control.setEvento("#transferirConta","click",function(){
 	control.tipo = "transferir";
 	control.telas.go(control);
 });
+
+control.FecharComponente();

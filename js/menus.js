@@ -143,7 +143,6 @@ menuPrincipal.defCss(function(){
 			min-height:35px;
 			}
 		.Pmenu{
-			
 			height:100%;
 			width:100%;
 			position:absolute;
@@ -151,9 +150,8 @@ menuPrincipal.defCss(function(){
 			border-right:2px solid lightblue;
 		}
 	}
-	`;
-	
+	`;	
 });
 
-
+menuPrincipal.FecharComponente();
 

@@ -10,14 +10,15 @@
 	});
 	//op
 topo.setEvento("span.hamb","click",function(){
-	var MenuPrincipal = document.querySelector("#menuPrincipal");
-	var p = getComputedStyle(MenuPrincipal).display
+topo.AlternarDisplay("#menuPrincipal");
+/*	var MenuPrincipal = document.querySelector("#menuPrincipal");
+	var p = getComputedStyle(MenuPrincipal).display;
 	if(p == "none"){
 		MenuPrincipal.style.display = "block";
 	}
 	else if(p == "block"){
 		MenuPrincipal.style.display = "none";
-	}
+	}*/
 });
 topo.defCss(function(){
 	return `

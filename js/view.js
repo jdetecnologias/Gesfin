@@ -103,12 +103,22 @@ View.prototype.renderizar = function(seletor, tipo = null, view = null) {
 
 View.prototype.startEvent = function() {
     this.eventos.forEach(item=>{
-      var elementoToEvent = this.seletorPai.querySelectorAll(item.el);
-      Array.prototype.forEach.call(elementoToEvent,it=>{
-          it.addEventListener(item.evento, function(e){ 
-            item.func.call(this,e);
-          });
-      });
+		if(typeof item.el == "object"){
+			item.el.addEventListener(item.evento, function(e){ 
+					item.func.call(this,e);
+				});
+		}
+		else if(typeof item.el == "string"){
+			var elementoToEvent = this.seletorPai.querySelectorAll(item.el);
+			Array.prototype.forEach.call(elementoToEvent,it=>{
+				it.addEventListener(item.evento, function(e){ 
+					item.func.call(this,e);
+				});
+			});
+		}
+
+
+		
     });
 }
 
@@ -240,43 +250,60 @@ View.prototype.tela = function(fn,nome) {
 
 	
 }
-View.prototype.verify = function(lista,compare){
-		_that = this;
-		sucess = 0;
-		if(lista){
-			
-			lista.forEach(itm=>{
-				if(itm.hasChildNodes()){
-					_that.verify(itm.childNodes,compare);
-				}
-				console.log(itm,compare);
-				if(itm == compare){
-					sucess++;
-				}
-				else{
-					
-				}
-				
-				
-			});
-			
-		}
-		return sucess;
-}
-View.prototype.FecharComponente = function(_that = this){
 
+View.prototype.FecharComponente = function(){
+	var _that = this;
+	var clicado = false;
+	
+	/*this.defTrigger(function(){	
+		this.setEvento(this.me,"click",function(){
+		clicado = true;
+		});	
+	});
+*/
 	document.addEventListener("click",function(e){
 		if(_that.render){
-			var a = _that.verify(_that.me.childNodes,e.target);
-			console.log(a);
-			if(e.target == _that.me){
-				
-			}
-			else{
-				_that.me.style.display = "none";
+			var x = _that.me.getBoundingClientRect().x;
+			if(_that.me.getAttribute("mostrar") == "false"){
+				if(!_that.me.contains(e.target)){
+					_that.me.style.display = "none";
+				}
 			}
 		}
 	});
-	
+}
+
+View.prototype.AlternarDisplay = function(elemento){
+		var alternar = function(el){
+		var disp = getComputedStyle(el).display;
+		
+		if(disp == "none"){
+			el.style.display == "block";
+			el.setAttribute("mostrar","true");
+		}
+		else if(disp =="block"){
+			el.style.display == "block";
+			el.setAttribute("mostrar","false");
+		}
+	}
+	if(elemento){
+		switch(typeof elemento){
+			case "object":
+				alternar(elemento);
+			break;
+			case "string":
+				var elementos = $(elemento);// precisa do plugin funcçoes onde contem esse método $();
+				
+				if(elementos.length > 1){
+					Array.prototype.forEach.call(elementos,itm=>{
+							alternar(itm);
+					});
+				}
+				else{
+					alternar(elementos);
+				}
+			break;
+		}
+	}
 }
 

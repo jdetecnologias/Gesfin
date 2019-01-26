@@ -1,8 +1,8 @@
 FF  branch req0001  1  - replicar / transferir contas;
 2 - Adicionar contas de forma mais eficiente;
 3 - Criar botoes para filtro de contas ou outra forma de filtragem;
-4 - Criar notificações;
- branch req0005 5 - Implementar o ano nas pesquisas;
+branch req0004 4 - Criar notificações;
+FF  branch req0005 5 - Implementar o ano nas pesquisas;
 
 
 

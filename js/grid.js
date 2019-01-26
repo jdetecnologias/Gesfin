@@ -3,20 +3,43 @@
 
 	var tabela = new View();
 	
-	tabela.setTemplate(function(mes = (data.getMonth()+1)){
+	tabela.setTemplate(function(mes,ano){
+		if(!mes){
+			if(!tabela.mes){
+				mes = (data.getMonth()+1);
+				tabela.mes = mes;
+			}
+			else{
+				mes = tabela.mes;
+			}
+		}
+		else{
+			tabela.mes = mes;
+		}
+		if(!ano){
+			if(!tabela.ano){
+				ano = (data.getFullYear());
+				tabela.ano = ano;
+			}
+			else{
+				ano = tabela.ano;
+			}
+		}
+		else{
+			tabela.ano = ano;
+		}
+		console.log(ano);
 		abas.defTrigger(function(){
 			abas.me.children[mes-1].children[0].classList.add("activeAba");
 		});
-		
-		tabela.mes = mes;
+		tabela.ano = ano;
 		var meses = getMeses();
 		var html = `
 					<div id="contas" class="limparFloat">
-						<h3 class="">${meses[mes-1]}</h3>
-						<table mes="${mes}" ano="" cellspacing='0' id="tabelaConta" class="table-responsive">
+						<table mes="${mes}" ano="${ano}" cellspacing='0' id="tabelaConta" class="table-responsive">
 							`;
 		var conect = new Conectar();
-		conect.defDados("mes="+mes);
+		conect.defDados("mes="+mes+"&ano="+ano);
 		conect.post("./sys/contasMes.php",function(){
 		});
 		var resposta = JSON.parse(conect.resposta);

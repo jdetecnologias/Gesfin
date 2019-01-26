@@ -78,9 +78,9 @@ menuPrincipal.defCss(function(){
 
 			}
 		#menuPrincipal{
+			display:none;
 			z-index:99;
 			overflow:hidden;
-			display:none;
 			background-color:rgba(255,165,0,1);
 			top:50px;
 			width:30%;
@@ -153,5 +153,4 @@ menuPrincipal.defCss(function(){
 	`;	
 });
 
-menuPrincipal.FecharComponente();
 

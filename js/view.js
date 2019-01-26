@@ -1,6 +1,7 @@
 function View() {
- this.nome = null;
-	this.indice = null;
+  this.nome = null;
+  this.alterna = false;
+  this.indice = null;
   this.template = null;
   this.seletorString = null;
   this.seletorPai = null;
@@ -254,35 +255,43 @@ View.prototype.tela = function(fn,nome) {
 View.prototype.FecharComponente = function(){
 	var _that = this;
 	var clicado = false;
-	
-	/*this.defTrigger(function(){	
-		this.setEvento(this.me,"click",function(){
-		clicado = true;
-		});	
-	});
-*/
+
 	document.addEventListener("click",function(e){
 		if(_that.render){
-			var x = _that.me.getBoundingClientRect().x;
-			if(_that.me.getAttribute("mostrar") == "false"){
 				if(!_that.me.contains(e.target)){
 					_that.me.style.display = "none";
 				}
-			}
+			
 		}
 	});
 }
 
-View.prototype.AlternarDisplay = function(elemento){
-		var alternar = function(el){
+View.prototype.AlternarDisplay = function(view){
+	if(view){
+	view.alterna = true;
+   var disp= getComputedStyle(view.me).display;
+   if(disp == "block"){
+       view.me.style.display = "none";
+	}
+   else if(disp == "none"){
+	view.me.style.display = "block";
+	}
+}
+
+	
+	
+	
+	
+	
+	
+		/*var alternar = function(el){
 		var disp = getComputedStyle(el).display;
-		
 		if(disp == "none"){
 			el.style.display == "block";
 			el.setAttribute("mostrar","true");
 		}
 		else if(disp =="block"){
-			el.style.display == "block";
+			el.style.display == "none";
 			el.setAttribute("mostrar","false");
 		}
 	}
@@ -304,6 +313,6 @@ View.prototype.AlternarDisplay = function(elemento){
 				}
 			break;
 		}
-	}
+	}*/
 }
 

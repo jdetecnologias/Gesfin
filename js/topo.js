@@ -10,7 +10,9 @@
 	});
 	//op
 topo.setEvento("span.hamb","click",function(){
-topo.AlternarDisplay("#menuPrincipal");
+
+topo.AlternarDisplay(menuPrincipal);
+
 /*	var MenuPrincipal = document.querySelector("#menuPrincipal");
 	var p = getComputedStyle(MenuPrincipal).display;
 	if(p == "none"){

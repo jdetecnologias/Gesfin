@@ -4,6 +4,7 @@
 			<header class="limparFloat">
 				<span id="hambMenu" class="hamb flutuarEsq fas fa-bars center"></span>
 				<div id="logo" class="flutuarEsq center">GFO</div>
+				<i id="notice" class="flutuarEsq fas fa-exclamation-circle"></i>
 				<a href="./sys/logout.php"><i id="sair" class="flutuarEsq fas fa-sign-out-alt"></i></a>
 			</header>
 		`;
@@ -55,6 +56,12 @@ topo.defCss(function(){
 		header #logo {
 			width:100%;
 		
+		}
+		i#notice{
+			position:absolute;
+			right:50px;
+			line-height:50px;
+			font-size:30px;
 		}
 	`;
 });

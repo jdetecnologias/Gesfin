@@ -23,6 +23,23 @@ Conectar.prototype.post = function(url,functionCallback){ // dados em objeto
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		xhr.send(this.dados); 
 }
+
+Conectar.prototype.get = function(url,functionCallback){ // dados em objeto
+	var xhr = this.ajax;
+	conection = this;
+    xhr.onreadystatechange = function(){
+      if(xhr.readyState == 4){
+       if(xhr.status == 200 || xhr.status == 304){
+		   conection.resposta = xhr.responseText;
+		   conection.reqDone = true;
+		   functionCallback();
+       }
+      }
+     }
+ 	  	xhr.open("get",url,false);
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		xhr.send(this.dados); 
+}
 Conectar.prototype.abrirCon = function(url,functionCallback){
 	var xhr = this.ajax;
     xhr.onreadystatechange = function(){

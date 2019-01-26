@@ -28,7 +28,7 @@
 		else{
 			tabela.ano = ano;
 		}
-		console.log(ano);
+
 		abas.defTrigger(function(){
 			abas.me.children[mes-1].children[0].classList.add("activeAba");
 		});

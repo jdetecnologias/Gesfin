@@ -66,3 +66,6 @@ topo.defCss(function(){
 	`;
 });
 
+topo.setEvento("#notice","click",function(){
+	topo.AlternarDisplay(notify);
+});

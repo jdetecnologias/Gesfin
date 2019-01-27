@@ -7,7 +7,7 @@ main.renderizar("#container");
 //abas.renderizar("main");
 
 painelSaldo.renderizar("main");
-notify.renderizar("header");
+notify.renderizar("#container");
 //menuTipoExtrato.renderizar("main");
 seletor.renderizar("main");
 tabela.renderizar("main");

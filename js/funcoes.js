@@ -11,8 +11,9 @@
 	}
 	
 function BrasilSistemaDecimal(valor){
-	
-	if(valor && typeof valor == "number"){
+
+	if(valor && typeof !isNaN(valor)){
+		valor = parseInt(valor);
 		return "R$ "+valor.toFixed(2).replace(".",",");
 	}
 	else {

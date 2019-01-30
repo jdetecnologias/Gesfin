@@ -121,31 +121,30 @@ tabela.setEvento("td input","change",function(){
 		return `
 		
 			<section id="form">
-			<div id="ControleFormSaldo"><button class="fecharJan">Fechar</button></div>
+			<div id="ControleFormSaldo"><i class="fas fa-window-close fecharJan"></i></div>
 				<fieldset>
-					<label>Descrição</label>
-					<input type="text" name="desc" id="descSaldo"/>
+					<input type="text" name="desc" id="descSaldo" placeholder="Descrição"/>
 				</fieldset>
 				<fieldset>
-					<label>valor</label>
-					<input type="text" name="desc" id="valorSaldo"/>
+					<input type="text" name="desc" id="valorSaldo" placeholder="Valor"/>
 				</fieldset>
 				<fieldset>
-					<label>Empresa</label>
-					<input type="text" name="emp" id="empSaldo"/>
+					<input type="text" name="emp" id="empSaldo" placeholder="Empresa"/>
 				</fieldset>
-				<fieldset>
-					<label>Data de vencimento</label>
-					<input type="date" name="data_venc" id="data_vencSaldo"/>
+				<fieldset id="duplicar">
+					<div class="flutuarEsq" id="_data">
+						<label>Vencimento</label>
+						<input type="date" name="data_venc" id="data_vencSaldo"/>
+					</div>
+					<div class="flutuarEsq" id="_tipo">
+						<label class="limparFloat">Tipo</label>
+						<div>
+							<input type="radio" class="limparFloat" name="tipoSaldo" value="1"> Débito
+							<input type="radio" class="limparFloat" name="tipoSaldo" value="2"> Crédito
+						</div>
+					</div>
 				</fieldset>
-				<fieldset>
-					<label>Tipo</label>
-					<select id="tipoSaldo" name="tipo">
-						<option value=1>Debito</option>
-						<option value=2>Credito</option>
-					</select>
-				</fieldset>
-				<fieldset>
+				<fieldset id="botoes">
 					<button id="salvarSaldo">Gravar</button>
 					<button class="fecharJan">Cancelar</button>
 				</fieldset>
@@ -179,6 +178,80 @@ tabela.setEvento("td input","change",function(){
 		formCad.me.style.display = "none";
 		}
 	});
+	formCad.defCss(function(){
+		return ` 
+				@media screen and (min-width:641px){
+					
+					section#form{
+						border-radius:10px 10px 0 0;
+						color:white;
+						position:fixed;
+						font-family:sans-serif;
+						position:absolute;
+						left:40%;
+						bottom:0;
+						width:40%;
+						background-color:red;
+					}
+				}
+					@media screen and (max-width:640px){
+					section#form{
+						border-radius:5px 0;
+						color:white;
+						position:fixed;
+						font-family:tresans-serif;
+						position:absolute;
+						left:5%;
+						bottom:0;
+						width:90%;
+						background-color:red;
+					}
+				}
+					fieldset#botoes{
+						width:40%;
+						margin-left:30%;
+					}
+					#ControleFormSaldo{
+						width:100%;
+						height:25px;
+						line-height:25px;
+					}	
+					#ControleFormSaldo i{
+						margin-right:10px;
+						line-height:25px;
+					}	
+					#form fieldset{
+						margin-top:5px;
+						border:0;
+						
+					}
+					#form fieldset input[type=text]{
+						width:90%;
+						height:30px;
+						margin-left:5%;
+					}
+					#form fieldset#duplicar{
+						width:95%;
+						margin-left:2.5%;
+					}
+					#form fieldset#duplicar div#_data{
+						width:40%;
+
+					}
+					#form fieldset#duplicar div#_tipo{
+						margin-left:10%;
+						width:50%;
+
+					}
+					#form fieldset#duplicar div label{
+						width:100%;
+					}
+					#form fieldset input[type="radio"]{
+						font-size:12px; !important
+						width:50%;
+					}
+		`;
+	});
 	tabela.defCss(function(){
 		return `
 				#contas  {
@@ -208,6 +281,15 @@ tabela.setEvento("td input","change",function(){
 	botaoAddConta.setTemplate(function(){
 		return `
 			<button id="addConta">Adicionar</button>
+		`;
+	});
+	botaoAddConta.defCss(function(){
+		return `
+				#addConta{
+					position:fixed;
+					bottom:0;
+					left:0;
+				}
 		`;
 	});
 botaoAddConta.setEvento("#addConta","click",function(){

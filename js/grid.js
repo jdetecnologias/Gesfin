@@ -1,9 +1,88 @@
 
 	var data = new Date();
-
 	var tabela = new View();
+	tabela.model = function(){
+		var conect = new Conectar();
+		conect.defDados("mes="+tabela.mes+"&ano="+tabela.ano);
+		conect.post("./sys/contasMes.php",function(){
+			
+		});
+		return JSON.parse(conect.resposta);
+	}
 	
-	tabela.setTemplate(function(mes,ano){
+	tabela.gerarTabela = function(arr){
+					var html = `
+						<div id="contas" class="limparFloat">
+							<table mes="${tabela.mes}" ano="${tabela.ano}" cellspacing='0' id="tabelaConta" class="table-responsive">
+								`;
+					var debito = 0;
+					var credito = 0 ;
+					var pendenteDebito = 0;
+					var pendenteCredito = 0;
+					var concluidoDebito = 0;
+					var concluidoCredito = 0;
+		if(arr == 0){
+			html += `<tr><td colspan=5>Não há resultados a serem apresentados</td></tr>`;
+		}
+		else{
+			arr.map((itm,indice)=>{
+					itm.valor = parseFloat(itm.valor);
+					if(itm.data_pgto == null){
+						itm.data_pgto = "";
+					}
+					var classe ="impar";
+					if(indice%2 ==0){
+						classe="par";
+					}
+					if(itm.tipo.toLowerCase() == "debito"){
+						debito += itm.valor;
+					}
+					if(itm.tipo.toLowerCase() == "credito"){
+						credito += itm.valor;
+						if(itm.status.toLowerCase() == "concluido"){
+							concluidoCredito += itm.valor;
+						}
+						else if(itm.status.toLowerCase() == "pendente"){
+							pendenteCredito += itm.valor;
+						}
+					}
+					html += `
+									<table class="${classe} linha" id='${itm.id}'>
+										<tr>
+											<td class="data_vencSaldo">dt. venc</td>\n
+											<td class="">dt. pagto</td>
+											<td coluna='tipo' class="tipo">${NullToString(itm.tipo)}</td>
+										</tr>
+										<tr>
+											<td coluna='data_venc'>	<input type='date'  value='${itm.data_venc}' />	</td>\n
+											<td coluna='data_pgto'><input type='date'  value='${itm.data_pgto}' />	</td>
+											<td coluna='status'>${itm.status}</td>
+										</tr>
+										<tr>
+											
+											<td coluna='descricao' class="desc" colspan=2><input type='text'  value='${NullToString(itm.descricao)}' />	</td>\n
+											<td coluna='valor' class="vl"><input type='text'  value='${itm.valor}' />		</td>\n
+											
+										</tr>
+									</table>
+								`;
+				});
+				
+						html += `
+		
+			</table>
+			</div>
+			`;
+		}
+					console.log(arr);
+					arr.credito = credito;
+					arr.debito = debito;
+					arr.concluido = concluidoCredito;
+					arr.pendente = pendenteCredito;
+					
+			return {credito:credito,debito:debito,concluido:concluidoCredito,pendente:pendenteCredito,html:html};
+	}
+	tabela.setTemplate(function(mes,ano,dados){
 		if(!mes){
 			if(!tabela.mes){
 				mes = (data.getMonth()+1);
@@ -28,62 +107,19 @@
 		else{
 			tabela.ano = ano;
 		}
-
+		var resposta = tabela.model();
+		tabela.dados = resposta.despesas;
+		if(dados){
+			resposta.despesas = dados;
+		}
 		abas.defTrigger(function(){
 			abas.me.children[mes-1].children[0].classList.add("activeAba");
 		});
 		tabela.ano = ano;
 		var meses = getMeses();
-		var html = `
-					<div id="contas" class="limparFloat">
-						<table mes="${mes}" ano="${ano}" cellspacing='0' id="tabelaConta" class="table-responsive">
-							`;
-		var conect = new Conectar();
-		conect.defDados("mes="+mes+"&ano="+ano);
-		conect.post("./sys/contasMes.php",function(){
-		});
-		var resposta = JSON.parse(conect.resposta);
-		if(resposta.despesas == 0){
-			html += `<tr><td colspan=5>Não há resultados a serem apresentados</td></tr>`;
-		}
-		else{
-			extrato.atualizaTemplate([resposta.despesas]);
-			resposta.despesas.map((itm,indice)=>{
-				if(itm.data_pgto == null){
-					itm.data_pgto = "";
-				}
-				var classe ="impar";
-				if(indice%2 ==0){
-					classe="par";
-				}
-				html += `
-								<table class="${classe} linha" id='${itm.id}'>
-									<tr>
-										<td class="data_vencSaldo">dt. venc</td>\n
-										<td class="">dt. pagto</td>
-										<td coluna='tipo' class="tipo">${itm.tipo}</td>
-									</tr>
-									<tr>
-										<td coluna='data_venc'>	<input type='date'  value='${itm.data_venc}' />	</td>\n
-										<td coluna='data_pgto'><input type='date'  value='${itm.data_pgto}' />	</td>
-										<td coluna='status'>${itm.status}</td>
-									</tr>
-									<tr>
-										
-										<td coluna='descricao' class="desc" colspan=2><input type='text'  value='${itm.descricao}' />	</td>\n
-										<td coluna='valor' class="vl"><input type='text'  value='${itm.valor}' />		</td>\n
-										
-									</tr>
-								</table>
-							`;
-			});
-		}
-		html += `
-	
-		</table>
-		</div>
-		`;
-		painelSaldo.atualiza([resposta.credito,resposta.debito, resposta.concluido,resposta.pendente]);
+		var retorno = tabela.gerarTabela(resposta.despesas);
+		html = retorno.html;
+		painelSaldo.atualiza([retorno.credito,retorno.debito, retorno.concluido,retorno.pendente]);
 		return html;
 	});
 	tabela.setEvento(".linha","dblclick",function(){

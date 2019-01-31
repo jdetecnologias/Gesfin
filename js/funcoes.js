@@ -41,3 +41,12 @@ function fazer(string){
 	var elementos = $(string);
 	return elementos;
 }
+
+function NullToString(variavel){
+	if(variavel == null ){
+		return "";
+	}
+	else{
+		return variavel;
+	}
+}

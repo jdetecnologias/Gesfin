@@ -42,15 +42,15 @@ seletor.setEvento(".dec","click",function(){
 seletor.defCss(function(){
 	
 	return `
-	@media screen and (max-width:640px){
+	@media screen and (max-width:474px){
 			#seletorMes{
 				width:100%;
 				height:50px;
 			} 
 	}
-		@media screen and (min-width:641px){
+	@media screen and (min-width:475px){
 			#seletorMes{
-				width:80%;	
+				width:473px;	
 			}			
 	}
 			#seletorMes{

@@ -10,11 +10,18 @@ main.setTemplate(function(){
 main.tela(avulsos);
 main.defCss(function(){
 	return `
-	@media screen and (min-width:641px){
+	@media screen and (min-width:475px){
 		main{
-			width:50%;
-			margin-left:25%;
-			
+		position:absolute;
+		top:50px;
+		left:-50%;
+		margin-left:100%;
+		}
+	}
+		@media screen and (max-width:474px){
+		main{
+	
+		width:100%;
 		}
 	}
 	`;

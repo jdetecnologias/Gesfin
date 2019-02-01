@@ -47,7 +47,7 @@
 						}
 					}
 					html += `
-									<table class="${classe} linha" id='${itm.id}'>
+									<table class="${classe} table-i linha" id='${itm.id}'>
 										<tr>
 											<td class="data_vencSaldo">dt. venc</td>\n
 											<td class="">dt. pagto</td>
@@ -69,10 +69,9 @@
 				});
 				
 						html += `
-		
-			</table>
-			</div>
-			`;
+								</table>
+								</div>
+								`;
 		}
 					console.log(arr);
 					arr.credito = credito;
@@ -216,7 +215,7 @@ tabela.setEvento("td input","change",function(){
 	});
 	formCad.defCss(function(){
 		return ` 
-				@media screen and (min-width:641px){
+				@media screen and (min-width:961px){
 					
 					section#form{
 						border-radius:10px 10px 0 0;
@@ -230,7 +229,7 @@ tabela.setEvento("td input","change",function(){
 						background-color:red;
 					}
 				}
-					@media screen and (max-width:640px){
+					@media screen and (max-width:960px){
 					section#form{
 						border-radius:5px 0;
 						color:white;
@@ -291,13 +290,12 @@ tabela.setEvento("td input","change",function(){
 	tabela.defCss(function(){
 		return `
 				#contas  {
-						height:500px;
-				overflow-y:auto;
+					height:500px;
+				    overflow-y:auto;
 					font-family:calibri,sans-serif;
 					overflow-x:auto;
 					margin-left:10px;
 				}
-			
 				.vl input{
 					width:70px;
 				}
@@ -306,11 +304,22 @@ tabela.setEvento("td input","change",function(){
 					
 					border:0;
 				}
-			
-				.table-responsive{
-			;
+			@media screen and (max-width:474px){
+				.table-i{
+					width:98%;
 				}	
-		`;
+			}
+			@media screen and (min-width:641px){
+				.table -i{
+					width:80%;
+				}	
+			}
+			@media screen and (min-width:475px){
+				.table-i{
+					width:450px;
+				}	
+			}
+				`;
 		
 	});
 	var botaoAddConta = new View();

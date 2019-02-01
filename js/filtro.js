@@ -25,33 +25,31 @@ filtro.setEvento("#textoFiltro","keyup",function(){
 
 filtro.defCss(function(){
 	return `
-		@media screen and (min-width:641px){
-			#filtro{
-				height:40px;
-				width:40%;
-				
+			@media screen and (min-width:475px){
+				#filtro input{
+				margin:0 0 0 50px;	
+				width:360px;
 			}
-			#filtro input{
-				margin:5px;
-				height:30px;
+			}
+		@media screen and (max-width:474px){
+				#filtro input{
+				margin:0 0 0 10%;
+				width:80%;
+				}
+			}
+		
+			#filtro{
+				margin:5px 5px 0 0;
+				height:40px;
 				width:100%;
 				
 			}
-		}
-		@media screen and (max-width:640px){
-			#filtro{
-				margin:5%;
-				height:40px;
-				width:90%;
-				
-			}
 			#filtro input{
-				margin:5px;
+				
 				height:30px;
-				width:100%;
 				
 			}
-		}
+	
 	`;
 });
 

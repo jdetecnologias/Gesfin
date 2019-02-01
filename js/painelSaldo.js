@@ -24,13 +24,13 @@
 		
 		
 		return `	#saldos {
-					margin-top:40px;
+					margin:5px 0 0 5px;
 					
 					width:100%;
 					border:0;					
 					font-family: Calibri, sans-serif;
 					}
-					@media screen and (max-width:640px){
+					@media screen and (max-width:474px){
 					#saldos table{
 						padding-top:5px;
 						margin-left:3%;
@@ -40,12 +40,12 @@
 						border-spacing:0;
 						}
 					}
-					@media screen and (min-width:641px){
+					@media screen and (min-width:475px){
 					#saldos table{
 						padding-top:5px;
-						margin-left:3%;
-						margin-right:3%;
-						width:30%;
+						margin-left:18px;
+						margin-right:18px;
+						width:436px;
 						text-align:center;
 						border-spacing:0;
 						}

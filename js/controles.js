@@ -75,7 +75,7 @@ control.defCss(function(){
 	#controles fieldset{
 		border:0;
 	}
-		@media screen and (max-width:640px){
+		@media screen and (max-width:960px){
 			section#controles{
 			
 				width:80%;
@@ -83,7 +83,7 @@ control.defCss(function(){
 			
 		}
 			
-		@media screen and (min-width:641px){
+		@media screen and (min-width:961px){
 			section#controles{
 			
 				width:20%;

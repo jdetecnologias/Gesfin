@@ -46,11 +46,11 @@ seletor.defCss(function(){
 			#seletorMes{
 				width:100%;
 				height:50px;
-			}
+			} 
 	}
 		@media screen and (min-width:641px){
 			#seletorMes{
-				width:40%;	
+				width:80%;	
 			}			
 	}
 			#seletorMes{

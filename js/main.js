@@ -13,10 +13,12 @@ main.defCss(function(){
 	@media screen and (min-width:475px){
 		main{
 		position:absolute;
-		top:50px;
-		left:-50%;
-		margin-left:100%;
-		}
+		margin-left:50%;
+		
+		width:460px;
+		transform:translateX(-50%);
+		//margin-left:25%;
+		} 
 	}
 		@media screen and (max-width:474px){
 		main{

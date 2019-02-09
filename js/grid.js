@@ -121,17 +121,21 @@
 		painelSaldo.atualiza([retorno.credito,retorno.debito, retorno.concluido,retorno.pendente]);
 		return html;
 	});
-	tabela.setEvento(".linha","dblclick",function(){
-		var id = this.getAttribute("id");
-		control.atualizaTemplate([id]);
-		control.renderizar("main");
-	}); 
-		tabela.setEvento(".linha","click",function(){
-		if(this.classList.contains("selected")){
-			this.classList.remove("selected");
+	tabela.setEvento(".linha","dblclick",function(e){
+		if(e.target.nodeName != "INPUT"){
+			var id = this.getAttribute("id");
+			control.atualizaTemplate([id]);
+			control.renderizar("main");
 		}
-		else{
-			this.classList.add("selected");
+	}); 
+		tabela.setEvento(".linha","click",function(e){
+		if(e.target.nodeName != "INPUT"){
+			if(this.classList.contains("selected")){
+				this.classList.remove("selected");
+			}
+			else{
+				this.classList.add("selected");
+			}
 		}
 	});
 
@@ -301,7 +305,7 @@ tabela.setEvento("td input","change",function(){
 				}
 				
 				#contas table tr td input{
-					
+					cursor:text;
 					border:0;
 				}
 			@media screen and (max-width:474px){
@@ -319,6 +323,9 @@ tabela.setEvento("td input","change",function(){
 					width:450px;
 				}	
 			}
+			.table-i{
+				cursor:pointer;
+				}
 				`;
 		
 	});

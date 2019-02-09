@@ -19,7 +19,8 @@ function View() {
 					go: 		function(view){
 					view.telas.atual += 1;
 					view.seletorPai.replaceChild(view.telas.telas[(view.telas.atual-1)].getFragment(),view.seletorPai.children[view.indice]);
-					view.startEvent();
+					console.log(view.telas.telas[(view.telas.atual-1)]);
+					view.telas.telas[(view.telas.atual-1)].startEvent();
 					}
 				};
 }
@@ -271,48 +272,22 @@ View.prototype.AlternarDisplay = function(view){
 	view.alterna = true;
    var disp= getComputedStyle(view.me).display;
    if(disp == "block"){
-       view.me.style.display = "none";
+        view.esconder();
 	}
    else if(disp == "none"){
-	view.me.style.display = "block";
+		view.mostrar();
 	}
 }
+}
 
-	
-	
-	
-	
-	
-	
-		/*var alternar = function(el){
-		var disp = getComputedStyle(el).display;
-		if(disp == "none"){
-			el.style.display == "block";
-			el.setAttribute("mostrar","true");
-		}
-		else if(disp =="block"){
-			el.style.display == "none";
-			el.setAttribute("mostrar","false");
-		}
+View.prototype.esconder = function(){
+	if(this.render){
+		this.me.style.display = "none";
 	}
-	if(elemento){
-		switch(typeof elemento){
-			case "object":
-				alternar(elemento);
-			break;
-			case "string":
-				var elementos = $(elemento);// precisa do plugin funcçoes onde contem esse método $();
-				
-				if(elementos.length > 1){
-					Array.prototype.forEach.call(elementos,itm=>{
-							alternar(itm);
-					});
-				}
-				else{
-					alternar(elementos);
-				}
-			break;
-		}
-	}*/
+}
+View.prototype.mostrar = function(){
+	if(this.render){
+		this.me.style.display = "block";
+	}
 }
 

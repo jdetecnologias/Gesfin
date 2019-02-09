@@ -21,7 +21,6 @@ if(isset($_SESSION["hash"])){
 <script src="./js/conectar.js" type="text/javascript"></script>
 <script src="./js/container.js" type="text/javascript"></script>
 <script src="./js/topo.js" type="text/javascript"></script>
-<script src="./js/avulsos.js" type="text/javascript"></script>
 <script src="./js/main.js" type="text/javascript"></script>
 <script src="./js/abas.js" type="text/javascript" ></script>
 <script src="./js/extrato.js" type="text/javascript"></script>
@@ -32,9 +31,9 @@ if(isset($_SESSION["hash"])){
 <script src="./js/controles.js" type="text/javascript"></script>
 <script src="./js/notificacao.js" type="text/javascript"></script>
 <script src="./js/filtro.js" type="text/javascript"></script>
-<script src="./js/inicio.js" type="text/javascript"></script>
+<script src="./js/starter.js/inicio.js" type="text/javascript"></script>
 <?php 
-	echo $_SESSION['id'];
+	
 }
 else{
 	header("location:./index.php");

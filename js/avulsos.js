@@ -16,8 +16,8 @@ avulsos.setTemplate(function(){
 					<input type="date" name="dt_compra" id="dt_compra"/>
 				</fieldset>
 					<fieldset>
-					<button type="submit">Salvar</button>
-					<button type="reset">Limpar</button>
+					<button type="submit" class="bto bto-pq primaria">Salvar</button>
+					<button type="reset" class="bto bto-pq primaria">Limpar</button>
 				</fieldset>
 			</form>
 		</div>
@@ -25,6 +25,9 @@ avulsos.setTemplate(function(){
 });
 avulsos.defCss(function(){
 	return `
+		#lancarAvulsos {
+			margin-top:20px;
+		}
 		#lancarAvulsos input,textarea{
 			width:100%;
 		}
@@ -34,7 +37,7 @@ avulsos.defCss(function(){
 		form label{
 			height:40px;
 		}
-		@media screen and (max-width: 640px){
+		@media screen and (max-width: 474px){
 			#lancarAvulsos{
 				display:block;
 				margin-left:10%;
@@ -42,7 +45,7 @@ avulsos.defCss(function(){
 				height:50%;
 			}
 		}
-		@media screen and (min-width: 641px){
+		@media screen and (min-width: 475px){
 		#lancarAvulsos{
 			margin-left:25%;
 			width:50%;

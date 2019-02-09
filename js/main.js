@@ -7,7 +7,6 @@ main.setTemplate(function(){
 	`;
 });
 
-main.tela(avulsos);
 main.defCss(function(){
 	return `
 	@media screen and (min-width:475px){

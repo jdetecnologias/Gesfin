@@ -6,6 +6,7 @@
 <head><meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+<link href="./fa/css/all.css" rel="stylesheet">
 <title>GesFin - Lançamento Avulsos</title>
 </head>
 <body>
@@ -18,9 +19,9 @@
 <script src="./js/topo.js" type="text/javascript"></script>
 <script src="./js/main.js" type="text/javascript"></script>
 <script src="./js/menus.js" type="text/javascript"></script>
-<script src="./js/painelSaldo.js" type="text/javascript"></script>
-<script src="./js/seletorMes.js" type="text/javascript"></script>
 <script src="./js/avulsos.js" type="text/javascript"></script>
+<script src="./js/notificacao.js" type="text/javascript"></script>
+<script src="./js/starter.js/avulsos.js" type="text/javascript"></script>
 
 
 

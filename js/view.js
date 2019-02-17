@@ -1,6 +1,7 @@
 function View() {
   this.nome = null;
   this.alterna = false;
+  this.houveReplace = false;
   this.indice = null;
   this.template = null;
   this.seletorString = null;
@@ -18,9 +19,9 @@ function View() {
 					telas:[],
 					go: 		function(view){
 					view.telas.atual += 1;
-					view.seletorPai.replaceChild(view.telas.telas[(view.telas.atual-1)].getFragment(),view.seletorPai.children[view.indice]);
-					console.log(view.telas.telas[(view.telas.atual-1)]);
+					view.me.replaceChild(this.telas[(view.telas.atual-1)].template,view.me.children[0]);
 					view.telas.telas[(view.telas.atual-1)].startEvent();
+					view.houveReplace = true;
 					}
 				};
 }
@@ -61,11 +62,15 @@ View.prototype.autoRenderize = function() {
   
 }
 View.prototype.setSeletor = function(seletor) {
-  this.seletorString = seletor;
-  this.seletorPai = document.querySelector(this.seletorString);
- 
-  return this.seletorPai;
-
+	if(typeof seletor == "string"){
+		this.seletorString = seletor;
+		this.seletorPai = document.querySelector(this.seletorString);
+	}
+	else if(typeof seletor == "object"){
+		this.seletorString = seletor.nodeName.toLowerCase()+"#"+seletor.getAttribute("id");
+		this.seletorPai = seletor;
+	}
+	return this.seletorPai;
 }
 
 View.prototype.getSeletor = function(seletor) {
@@ -75,12 +80,7 @@ View.prototype.getSeletor = function(seletor) {
 View.prototype.renderizar = function(seletor, tipo = null, view = null) {
 	
   var sel;
- if(typeof seletor === 'string'){
-    sel = this.setSeletor(seletor);
-  }
- else{
-    sel = this.seletorPai;
- }
+ sel = this.setSeletor(seletor);
   var append;
   if(view != null){
     this.fontes.push(view);
@@ -100,6 +100,14 @@ View.prototype.renderizar = function(seletor, tipo = null, view = null) {
 	}
 	this.render = true;
 	this.startEvent();
+  
+  if(this.telas.telas.length > 0){
+	  console.log(this.me.firstChild);
+	  this.telas.telas.forEach(itm=>{
+		 itm.renderizar("#"+this.me.getAttribute("id"));
+		 itm.me.classList.add("naoAtivo");
+	  });
+  }
   return this;
 }
 
@@ -224,11 +232,26 @@ View.prototype.$ = function(string){
 View.prototype.remover = function(){
 	if(this.me){
 		this.me.remove();	
+		this.indice = null;
 	}
 }
 
 View.prototype.tela = function(fn,nome) {
 	var name;
+	var formarTela = function(fn){
+		
+		var html = `<div id="tela">
+						<div>
+							<i class="fas fa-arrow-alt-circle-left"></i>
+						</div>
+						<div>
+							${fn}
+						</div>
+					</div>
+		`;
+		return html;
+		
+	}
 	if(nome == null){
 		name = (this.telas.telas.length+1);
 	}
@@ -237,17 +260,19 @@ View.prototype.tela = function(fn,nome) {
 	}
 	
 	
-	if(typeof fn == "function"){
-		
-	var tela = new View(); 
-	tela.setTemplate(fn);
-	tela.nome = name;
-	this.telas.telas.push(tela);
+	if(typeof fn == "function"){	
+		var tela = new View(); 
+		tela.setTemplate(formarTela(fn));
+		tela.nome = name;
+		this.telas.telas.push(tela);
 	}
 	else if(typeof fn == "object"){
-		
 		fn.nome = name;
-		this.telas.telas.push(fn);
+		
+		fn.geradorView = formarTela;
+		
+		fn.atualizaTemplate([fn.html]);
+		this.telas.telas.push(fn);	
 	}
 
 	
@@ -259,12 +284,12 @@ View.prototype.FecharComponente = function(){
 
 	document.addEventListener("click",function(e){
 		if(_that.render){
-				if(!_that.me.contains(e.target)){
+				if(!_that.me.contains(e.target) && !_that.houveReplace){
 					_that.me.style.display = "none";
 				}
-			
 		}
 	});
+	_that.houveReplace = false;
 }
 
 View.prototype.AlternarDisplay = function(view){

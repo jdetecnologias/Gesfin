@@ -1,6 +1,6 @@
 var control = new View();
 var mesAno = new View();
-mesAno.setTemplate(function(){
+mesAno.setTemplate(function(tipo){
 				var meses = getMeses();
 				
 				var option = "<option>Mês</option>";
@@ -8,7 +8,8 @@ mesAno.setTemplate(function(){
 						option += `<option value="${indice+1}">${itm}</option>`;	
 				});
 	
-	return `<section id="controles" class="limparFloat">
+	return `<div>
+				<h3 class="center">Escolher mês</h3>
 				<fieldset>
 				<select id="mesRep" name="mes">
 					
@@ -25,17 +26,19 @@ mesAno.setTemplate(function(){
 				</fieldset>
 				
 				
-			</section>`;
+			</div>`;
 });
+
+
 control.tela(mesAno);
 control.setTemplate(function(id = 0){
 	return `
 		<section id="controles" class="limparFloat">
 			<ul>
 				<li>Código Conta ${id}</li>
-				<li id="transferirConta">Transferir conta</li>
-				<li id="replicarContas">replicar conta</li>
-				<li id="excluirConta" codigo="${id}">Excluir contas</li>
+				<li id="transferirConta"><i class="icone fas fa-exchange-alt"></i><i class="desc">Transferir</i></li>
+				<li id="replicarContas"><i class="fas fa-reply"></i><i class="desc">Replicar</i></li>
+				<li id="excluirConta" codigo="${id}"><i class="fas fa-trash-alt"></i><i class="desc">Excluir</i></li>
 			</ul>
 		</section>
 	`;
@@ -75,35 +78,33 @@ control.defCss(function(){
 	#controles fieldset{
 		border:0;
 	}
-		@media screen and (max-width:960px){
+		@media screen and (max-width:474px){
 			section#controles{
-			
 				width:80%;
 			}
-			
 		}
-			
-		@media screen and (min-width:961px){
+		@media screen and (min-width:475px){
 			section#controles{
-			
-				width:20%;
+				left:25%;
+				width:50%;
 			}
-			
 		}
 			#controles{
+				box-shadow: 1px 1px 1px black;
 				background-color:rgba(255,255,255,1);
 				position:absolute;
-				top:50%;
-				left:50%;
+				top:45%;
 				margin-top:-35px;
-				
 				line-height:35px;
 			}
 			#controles i{
-			width:30px;
-			cursor:pointer;
+				width:30px;
+				cursor:pointer;
 			}
-		
+			#controles ul li{
+				width:80%;
+				cursor:pointer;
+			}
 		`;
 });
 
@@ -143,6 +144,5 @@ control.setEvento("#confirmar","click",function(){
 control.setEvento("#transferirConta","click",function(){
 	control.tipo = "transferir";
 	control.telas.go(control);
-});
-
+	});
 control.FecharComponente();

@@ -122,6 +122,7 @@
 		return html;
 	});
 	tabela.setEvento(".linha","dblclick",function(e){
+		console.log(e);
 		if(e.target.nodeName != "INPUT"){
 			var id = this.getAttribute("id");
 			control.atualizaTemplate([id]);

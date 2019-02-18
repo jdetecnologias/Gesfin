@@ -92,3 +92,6 @@ a{
 	.ativo{
 		display:block;
 	}
+	.imparFrio{
+		background-color:rgba(173,216,230,0.5);
+	}

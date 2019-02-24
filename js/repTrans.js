@@ -10,6 +10,8 @@
 	tabela.gerarTabela = function(arr){
 					var html = `
 						<div id="contasReplicar" class="">
+							<button id="replicar" class="bto primaria bto-pq">Replicar</button>
+							<button id="transferir" class="bto primaria bto-pq">transferir</button>
 							<table mes="${tabela.mes}" ano="${tabela.ano}" cellspacing='0' id="tabelaContaReplicar" class="flutuarEsq table-responsive">
 								<tr><td colspan=2">Conta</td><td>Dia</td><td>Tipo</td></tr>
 					`;
@@ -27,7 +29,7 @@
 						classe="parFrio";
 					}		
 					html += `
-									<tr class="${classe}"><td><input type="checkbox"/></td><td>${itm.descricao}</td><td>${itm.data_venc.split("-")[2]}</td><td>${itm.tipo[0]}</td></tr>
+									<tr id_e="${itm.id}" class="${classe}"><td><input type="checkbox"/></td><td>${itm.descricao}</td><td>${itm.data_venc.split("-")[2]}</td><td>${itm.tipo[0]}</td></tr>
 								`;
 				});
 				
@@ -67,32 +69,71 @@
 		tabela.ano = ano;
 		var meses = getMeses();
 		var b = "";
-		meses.forEach(itm=>{
-			 b += "<li>"+itm+"</li>";
-		
+		meses.forEach((itm,i)=>{
+			 b += "<li id_e='"+i+"'><input type='checkbox'/> "+itm+"</li>";
 		});
-		console.log("aaaa",meses);
 		var retorno = tabela.gerarTabela(resposta.despesas);
 		html = retorno.html;
 		html += `
 				<div id="selecionarMes" class="flutuarEsq">
 					<ul>
-			<li id="ano"><button class="primaria bto flutuarEsq">
-				<i class="fas fa-arrow-alt-circle-left"></i>
-			</button>
-			<div class="year flutuarEsq center">
-				2019
-			</div>
-			<button class="bto primaria flutuarEsq center">
-				<i class="fas fa-arrow-alt-circle-right"></i>
-			</button>
-			</li>
+						<li id="ano">
+							Ano
+							<select id="ano">
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+								<option value="2021">2021</option>
+							</select>
+						</li>
 						${b}
 					</ul>
 				</div>	
 		`;
 		return html;
 	});
+	tabela.setEvento("#replicar","click",function(){
+		var lResult = tabela.pegarInfo();
+		tabela.madarReq(lResult.ano,lResult.contas,lResult.mes,"transferir");
+	});
+	tabela.setEvento("#transferir","click",function(){
+
+		
+	});
+	tabela.madarReq = function(ano,contas,mes,tipo){
+		var conn = new Conectar();
+		console.log("antes",contas,typeof contas);
+		contas = JSON.stringify(contas);
+		mes = JSON.stringify(mes);
+		conn.defDados("ano="+ano+"&mes="+mes+"&contas="+contas+"&tipo="+tipo);
+		conn.post("./sys/transferirReplicar.php",function(){
+			console.log("depos","ano="+ano+"&mes="+mes+"&contas="+contas+"&tipo="+tipo);
+			if(conn.resposta == "1"){
+				alert("Operação realizada com sucesso");
+			}
+			else{
+				alert("Erro ao realizar operação");
+			}
+		});
+	}
+	tabela.pegarInfo = function(){
+		var Lcheckbox = tabela.$("#tabelaContaReplicar input[type=checkbox]");
+		var LcheckboxMes = tabela.$("#selecionarMes input[type=checkbox]");
+		var Lano = tabela.$("select#ano").value;
+		var Lchecked = [];
+		var LcheckedMes = [];
+		Array.prototype.map.call(Lcheckbox,(itm)=>{
+			if(itm.checked){
+				Lchecked.push(itm.parentNode.parentNode.getAttribute("id_e"));
+			}
+		});
+		Array.prototype.map.call(LcheckboxMes,(itm)=>{
+			if(itm.checked){
+				LcheckedMes.push(itm.parentNode.getAttribute("id_e"));
+			}
+		});
+		return {mes:LcheckedMes,contas:Lchecked,ano:Lano}
+	}
 	tabela.defCss(function(){
 		return `
 			#contasReplicar button {
@@ -134,6 +175,12 @@
 				padding:1px;
 				margin:0 0 0 0;
 				width:80%; 
+			}
+			#replicar{
+				cursor:pointer;
+			}
+			#transferir{
+				cursor:pointer;
 			}
 		`;
 	});

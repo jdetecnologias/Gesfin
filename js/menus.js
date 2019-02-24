@@ -54,7 +54,7 @@ menuPrincipal.setTemplate(function(){
 				<ul>
 					<li class="center">Menu</li>
 					<li><a href="inicio.php">Painel de contas</a></li>
-					<li>Extrato</li>
+					<li><a href="reply.php">replicar</a></li>
 				
 					<li id="avulsos"><a href="avulsos.php">Lançar avulsos</a></li>
 					<li>Bancos</li>

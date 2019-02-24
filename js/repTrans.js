@@ -10,10 +10,14 @@
 	tabela.gerarTabela = function(arr){
 					var html = `
 						<div id="contasReplicar" class="">
-							<button id="replicar" class="bto primaria bto-pq">Replicar</button>
-							<button id="transferir" class="bto primaria bto-pq">transferir</button>
-							<table mes="${tabela.mes}" ano="${tabela.ano}" cellspacing='0' id="tabelaContaReplicar" class="flutuarEsq table-responsive">
-								<tr><td colspan=2">Conta</td><td>Dia</td><td>Tipo</td></tr>
+							<div id="Tbutton">
+								<button id="replicar" class="bto primaria bto-pq">Replicar</button>
+								<button id="transferir" class="bto primaria bto-pq">Transferir</button>
+								<button id="excluir" class="bto primaria bto-pq">Excluir</button>
+							</div>
+							<div id="Ttabelas">
+								<table mes="${tabela.mes}" ano="${tabela.ano}" cellspacing='0' id="tabelaContaReplicar" class="flutuarEsq tabelas-replys table-responsive">
+									<tr><td colspan=2">Conta</td><td>Dia</td><td>Tipo</td></tr>
 					`;
 		if(arr == 0){
 			html += `<tr><td colspan=5>Não há resultados a serem apresentados</td></tr>`;
@@ -70,51 +74,65 @@
 		var meses = getMeses();
 		var b = "";
 		meses.forEach((itm,i)=>{
-			 b += "<li id_e='"+i+"'><input type='checkbox'/> "+itm+"</li>";
+			lClasse = "imparFrio";
+			if(i%2==0) var lClasse = "parFrio";
+			 b += "<tr class='"+lClasse+"'><td id_e='"+(i+1)+"'><input type='checkbox'/></td><td> "+itm+"</td></tr>";
 		});
 		var retorno = tabela.gerarTabela(resposta.despesas);
 		html = retorno.html;
 		html += `
-				<div id="selecionarMes" class="flutuarEsq">
-					<ul>
-						<li id="ano">
-							Ano
-							<select id="ano">
-								<option value="2018">2018</option>
-								<option value="2019">2019</option>
-								<option value="2020">2020</option>
-								<option value="2021">2021</option>
-							</select>
-						</li>
-						${b}
-					</ul>
-				</div>	
+					<table id="selecionarMes" class="flutuarEsq tabelas-replys" cellspacing='0'>
+							<tr class="imparFrio"><td>Ano</td>
+								<td>
+									<select id="ano">
+										<option value="2017">2017</option>
+										<option value="2018">2018</option>
+										<option value="2019" selected>2019</option>
+										<option value="2020">2020</option>
+										<option value="2021">2021</option>
+									</select>
+								</td>
+							</tr>
+							${b}
+					</div>	
+				</div>
 		`;
 		return html;
 	});
 	tabela.setEvento("#replicar","click",function(){
 		var lResult = tabela.pegarInfo();
-		tabela.madarReq(lResult.ano,lResult.contas,lResult.mes,"transferir");
+		tabela.mandarReq(lResult.ano,lResult.contas,lResult.mes,"replicar");
 	});
 	tabela.setEvento("#transferir","click",function(){
-
-		
+		var lResult = tabela.pegarInfo();
+		if(lResult.mes.length > 1){
+			alert("Favor selecionar apenas 1(um) mês!");
+		}else{
+			tabela.mandarReq(lResult.ano,lResult.contas,lResult.mes,"transferir");
+		}
 	});
-	tabela.madarReq = function(ano,contas,mes,tipo){
-		var conn = new Conectar();
-		console.log("antes",contas,typeof contas);
-		contas = JSON.stringify(contas);
-		mes = JSON.stringify(mes);
-		conn.defDados("ano="+ano+"&mes="+mes+"&contas="+contas+"&tipo="+tipo);
-		conn.post("./sys/transferirReplicar.php",function(){
-			console.log("depos","ano="+ano+"&mes="+mes+"&contas="+contas+"&tipo="+tipo);
-			if(conn.resposta == "1"){
-				alert("Operação realizada com sucesso");
-			}
-			else{
-				alert("Erro ao realizar operação");
-			}
-		});
+	tabela.setEvento("#excluir","click",function(){
+		var lResult = tabela.pegarInfo();
+		tabela.mandarReq(lResult.ano,lResult.contas,lResult.mes,"excluir");
+	});
+	tabela.mandarReq = function(ano,contas,mes,tipo){
+		if(contas.length > 0 && mes.length > 0 || tipo == "excluir"){
+			var conn = new Conectar();
+			console.log("antes",contas,typeof contas);
+			contas = JSON.stringify(contas);
+			mes = JSON.stringify(mes);
+			conn.defDados("ano="+ano+"&mes="+mes+"&contas="+contas+"&tipo="+tipo);
+			conn.post("./sys/transferirReplicar.php",function(){
+				console.log("depos","ano="+ano+"&mes="+mes+"&contas="+contas+"&tipo="+tipo);
+				if(conn.resposta == "1"){
+					alert("Operação realizada com sucesso");
+					tabela.resetarCampos();
+				}
+				else{
+					alert("Erro ao realizar operação");
+				}
+			});
+		}
 	}
 	tabela.pegarInfo = function(){
 		var Lcheckbox = tabela.$("#tabelaContaReplicar input[type=checkbox]");
@@ -134,29 +152,44 @@
 		});
 		return {mes:LcheckedMes,contas:Lchecked,ano:Lano}
 	}
+		tabela.resetarCampos = function(){
+		var Lcheckbox = tabela.$("#tabelaContaReplicar input[type=checkbox]");
+		var LcheckboxMes = tabela.$("#selecionarMes input[type=checkbox]");
+		Array.prototype.map.call(Lcheckbox,(itm)=>{
+			if(itm.checked){
+				itm.checked = false;
+			}
+		});
+		Array.prototype.map.call(LcheckboxMes,(itm)=>{
+			if(itm.checked){
+				itm.checked = false;
+			}
+		});
+	}
 	tabela.defCss(function(){
 		return `
+			#Ttabelas{
+				margin-top:5px;
+			}
 			#contasReplicar button {
 				width:30%;
 			
 			}
-			#tabelaContaReplicar{
+			.tabelas-replys{
 				font-family:calibri, arial,sans-serif;
 				padding:0 10px 0 10px;
 				width: 	62%;		
+				border:1px solid black;	
 			}
-			#tabelaContaReplicar tr td:hover{
+			.tabelas-replys tr td:hover{
 				font-size:14px;
 			}
-			#tabelaContaReplicar tr td{
+			.tabelas-replys tr td{
 				cursor:pointer;
 			}
-			#tabelaContaReplicar tr{
+			.tabelas-replys tr{
 				padding:1px;
 				height:30px;		
-			}
-			#tabelaContaReplicar{
-				border:1px solid black;		
 			}
 			#contaReplicar {
 				width:100%;
@@ -176,11 +209,9 @@
 				margin:0 0 0 0;
 				width:80%; 
 			}
-			#replicar{
+			#contaReplicar button{
 				cursor:pointer;
 			}
-			#transferir{
-				cursor:pointer;
-			}
+
 		`;
 	});

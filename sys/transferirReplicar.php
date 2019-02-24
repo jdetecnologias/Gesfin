@@ -22,41 +22,35 @@ case "replicar":
 		}
 		$pdo = null;
 	}
-	if ($error <= 0)
-	{
-		echo "1";
-		return true;
-	}
-	else
-	{
-		echo 0;
-		return false;
-	}
+	garantirRetorno($error);
 	break;
 case "transferir":
-	foreach($contas as $d)
+	$in_ = retornarIdConta($contas);
+ foreach($mes as $m)
 	{
-		$up = "update contas set ano = ?, mes = ? ,data_venc = ? where id = ?";
+		$up = "update contas set ano = ".$ano.", mes = ".$m." where id in ".$in_;
 		$pdo = new PDO($sqlite);
-		$data = getData($d->mes, $d->mes, "01");
-		echo getData("01", $d->mes, $d->ano);
 		$atualizar = $pdo->prepare($up);
 		$error = 0;
-		if (!$atualizar->execute([$d->ano, $d->mes, $data, $d->codigo]))
+		if (!$atualizar->execute())
 		{
 			$error++;
 		}
 	}
-	if ($error <= 0)
-	{
-		echo 1;
-		return true;
-	}
-	else
-	{
-		echo 0;
-		return false;
-	}
+	garantirRetorno($error);
+	break;
+	
+case "excluir":
+	$in_ = retornarIdConta($contas);
+		$del = "delete from contas where id in ".$in_;
+		$pdo = new PDO($sqlite);
+		$deletar = $pdo->prepare($del);
+		$error = 0;
+		if (!$deletar->execute())
+		{
+			$error++;
+		}
+	garantirRetorno($error);
 	break;
 }
 
@@ -101,4 +95,16 @@ function retornarIdConta($contas)
 
 	$string.= ")";
 	return $string;
+}
+function garantirRetorno($error){
+	if ($error <= 0)
+	{
+		echo 1;
+		return true;
+	}
+	else
+	{
+		echo 0;
+		return false;
+	}
 }

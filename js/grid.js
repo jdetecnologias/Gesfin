@@ -11,6 +11,7 @@
 	}
 	
 	tabela.gerarTabela = function(arr){
+					console.log(arr);
 					var html = `
 						<div id="contas" class="limparFloat">
 							<table mes="${tabela.mes}" ano="${tabela.ano}" cellspacing='0' id="tabelaConta" class="table-responsive">

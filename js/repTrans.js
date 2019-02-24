@@ -195,10 +195,12 @@
 				width:100%;
 			}
 			#selecionarMes{
+				position:fixed;
 				margin-left:5px;
 				text-align:center;
 				border:1px solid black;	
 				width:35%; 
+				left:63%;
 			}
 			#selecionarMes ul{
 				margin:0 0 0 10%;

@@ -1,5 +1,6 @@
 var seletor = new View();
-seletor.setTemplate(function(mes = 0,ano = 2019){
+var data = pegarData();
+seletor.setTemplate(function(mes = (data.getMonth()),ano = data.getFullYear()){
 	var meses = getMeses();
 	return `
 		<div id="seletorMes" class="limparFloat center" mes="${mes}" ano="${ano}">

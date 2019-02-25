@@ -1,5 +1,5 @@
 
-	var data = new Date();
+	var data = pegarData();
 	var tabela = new View();
 	tabela.model = function(){
 		var conect = new Conectar();
@@ -11,7 +11,6 @@
 	}
 	
 	tabela.gerarTabela = function(arr){
-					console.log(arr);
 					var html = `
 						<div id="contas" class="limparFloat">
 							<table mes="${tabela.mes}" ano="${tabela.ano}" cellspacing='0' id="tabelaConta" class="table-responsive">
@@ -74,7 +73,6 @@
 								</div>
 								`;
 		}
-					console.log(arr);
 					arr.credito = credito;
 					arr.debito = debito;
 					arr.concluido = concluidoCredito;
@@ -112,9 +110,6 @@
 		if(dados){
 			resposta.despesas = dados;
 		}
-		abas.defTrigger(function(){
-			abas.me.children[mes-1].children[0].classList.add("activeAba");
-		});
 		tabela.ano = ano;
 		var meses = getMeses();
 		var retorno = tabela.gerarTabela(resposta.despesas);
@@ -123,7 +118,6 @@
 		return html;
 	});
 	tabela.setEvento(".linha","dblclick",function(e){
-		console.log(e);
 		if(e.target.nodeName != "INPUT"){
 			var id = this.getAttribute("id");
 			control.atualizaTemplate([id]);
@@ -149,14 +143,10 @@ tabela.setEvento("td input","change",function(){
 				Con.defDados("coluna="+$coluna+"&item="+$item+"&id="+$id);
 			Con.post("./sys/SalvarItem.php",function(){
 			});
-			console.log(Con.resposta);
 					tabela.atualiza([tabela.mes]);
 		
 	});
-		
 	
-
-	//4108637461794408 843
 	var formCad = new View();
 	formCad.setTemplate(function(){
 		return `

@@ -50,3 +50,7 @@ function NullToString(variavel){
 		return variavel;
 	}
 }
+
+function pegarData(){
+	return new Date();
+}

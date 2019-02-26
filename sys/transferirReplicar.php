@@ -14,7 +14,7 @@ case "replicar":
 	foreach($mes as $m)
 	{
 		$pdo = new PDO($sqlite);
-		$sql = "insert into contas(descricao,valor,tipo,mes,ano,status,user,dia) select descricao,valor,tipo,(mes-mes+" . $m . "),(ano-ano+" . $ano . "),status,user,dia from contas where id in" . $in_;
+		$sql = "insert into contas(descricao,valor,tipo,mes,ano,status,user,dia) select descricao,valor,tipo,(mes-mes+" . $m . "),(ano-ano+" . $ano . "),(status*0),user,dia from contas where id in" . $in_;
 		$inserir = $pdo->prepare($sql);
 		if (!$inserir->execute())
 		{

@@ -1,5 +1,5 @@
 		var painelSaldo  = new View();
-	painelSaldo.setTemplate(function(credito = null,debito= null,concluido = null,pendente= null){
+	painelSaldo.setTemplate(function(credito = null,debito= null,concluidoCredito = null,concluidoDebito= null){
 	var x = 0;
 	while(arguments[x]){
 			if(arguments[x] == null){
@@ -11,8 +11,8 @@
 			<div id="saldos" class="limparFloat">
 				<table>
 					<tr class="cabecalho"><td>Crédito</td><td>Total</td><td>Pendente</td><td>Concluido</td></tr>
-					<tr class="par"><td>Crédito</td><td>${BrasilSistemaDecimal(credito)}</td><td>${BrasilSistemaDecimal((credito-concluido))}</td><td>${BrasilSistemaDecimal(concluido)}</td></tr>
-					<tr><td>Débito</td><td>${BrasilSistemaDecimal(debito)}</td><td>${BrasilSistemaDecimal(pendente)}</td><td>${BrasilSistemaDecimal((debito-pendente))}</td></tr>
+					<tr class="par"><td>Crédito</td><td>${BrasilSistemaDecimal(credito)}</td><td>${BrasilSistemaDecimal(credito-concluidoCredito)}</td><td>${BrasilSistemaDecimal(concluidoCredito)}</td></tr>
+					<tr><td>Débito</td><td>${BrasilSistemaDecimal(debito)}</td><td>${BrasilSistemaDecimal(debito-concluidoDebito)}</td><td>${BrasilSistemaDecimal((concluidoDebito))}</td></tr>
 					<tr class="par"><td>Balanço</td><td>${BrasilSistemaDecimal((credito-debito))}</td><td></td><td></td></tr>
 				</table>
 			</div>

@@ -36,14 +36,14 @@
 					}
 					if(itm.tipo.toLowerCase() == "debito"){
 						debito += itm.valor;
+						if(itm.status.toLowerCase() == "concluido"){
+							concluidoDebito += itm.valor;
+						}
 					}
 					if(itm.tipo.toLowerCase() == "credito"){
 						credito += itm.valor;
 						if(itm.status.toLowerCase() == "concluido"){
 							concluidoCredito += itm.valor;
-						}
-						else if(itm.status.toLowerCase() == "pendente"){
-							pendenteCredito += itm.valor;
 						}
 					}
 					html += `
@@ -78,7 +78,7 @@
 					arr.concluido = concluidoCredito;
 					arr.pendente = pendenteCredito;
 					
-			return {credito:credito,debito:debito,concluido:concluidoCredito,pendente:pendenteCredito,html:html};
+			return {credito:credito,debito:debito,concluidoCredito:concluidoCredito,concluidoDebito:concluidoDebito,html:html};
 	}
 	tabela.setTemplate(function(mes,ano,dados){
 		if(!mes){
@@ -114,7 +114,7 @@
 		var meses = getMeses();
 		var retorno = tabela.gerarTabela(resposta.despesas);
 		html = retorno.html;
-		painelSaldo.atualiza([retorno.credito,retorno.debito, retorno.concluido,retorno.pendente]);
+		painelSaldo.atualiza([retorno.credito,retorno.debito, retorno.concluidoCredito,retorno.concluidoDebito]);
 		return html;
 	});
 	tabela.setEvento(".linha","dblclick",function(e){

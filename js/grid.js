@@ -170,8 +170,8 @@ tabela.setEvento("td input","change",function(){
 					<div class="flutuarEsq" id="_tipo">
 						<label class="limparFloat">Tipo</label>
 						<div>
-							<input type="radio" class="limparFloat" name="tipoSaldo" value="1"> Débito
-							<input type="radio" class="limparFloat" name="tipoSaldo" value="2"> Crédito
+							<input type="radio" id="tipoSaldo" class="limparFloat" name="tipoSaldo" value="1"> Débito
+							<input type="radio" id="tipoSaldo" class="limparFloat" name="tipoSaldo" value="2"> Crédito
 						</div>
 					</div>
 				</fieldset>
@@ -187,11 +187,11 @@ tabela.setEvento("td input","change",function(){
 	});
 	formCad.setEvento("#salvarSaldo","click",function(){
 		
-		var desc = formCad.me.querySelector("#descSaldo").value;
-		var valor = formCad.me.querySelector("#valorSaldo").value;
-		var data_venc = formCad.me.querySelector("#data_vencSaldo").value;
-		var tipo = formCad.me.querySelector("#tipoSaldo").value;
-		var emp = formCad.me.querySelector("#empSaldo").value;
+		var desc = formCad.$("#descSaldo").value;
+		var valor = formCad.$("#valorSaldo").value;
+		var data_venc = formCad.$("#data_vencSaldo").value;
+		var tipo = formCad.$("#tipoSaldo").value;
+		var emp = formCad.$("#empSaldo").value;
 		var erro = [];
 		var a = 0;
 		if(desc == "" && valor == "" && emp == ""){

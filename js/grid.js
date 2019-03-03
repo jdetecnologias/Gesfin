@@ -176,7 +176,7 @@ tabela.setEvento("td input","change",function(){
 					</div>
 				</fieldset>
 				<fieldset id="botoes">
-					<button id="salvarSaldo">Gravar</button>
+					<button id="salvarSaldoForm">Gravar</button>
 					<button class="fecharJan">Cancelar</button>
 				</fieldset>
 			<section>
@@ -185,8 +185,7 @@ tabela.setEvento("td input","change",function(){
 	formCad.setEvento(".fecharJan","click",function(){
 		formCad.me.style.display = "none";
 	});
-	formCad.setEvento("#salvarSaldo","click",function(){
-		
+	formCad.setEvento("#salvarSaldoForm","click",function(){
 		var desc = formCad.$("#descSaldo").value;
 		var valor = formCad.$("#valorSaldo").value;
 		var data_venc = formCad.$("#data_vencSaldo").value;
@@ -207,6 +206,7 @@ tabela.setEvento("td input","change",function(){
 		
 		tabela.atualiza([tabela.mes]);
 		formCad.me.style.display = "none";
+		
 		}
 	});
 	formCad.defCss(function(){
@@ -338,6 +338,5 @@ tabela.setEvento("td input","change",function(){
 	});
 botaoAddConta.setEvento("#addConta","click",function(){
 		formCad.renderizar("body");
-		formCad.startEvent();
 });
 

@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 $id = $_SESSION["id"];
@@ -8,13 +7,14 @@ $emp = $_POST["empSaldo"];
 $venc = $_POST["data_vencSaldo"];
 $tipoConta = $_POST["tipoSaldo"];
 $dataEx = explode("-",$venc);
+$dia = $dataEx[2];
 $mes = $dataEx[1];
 $ano = $dataEx[0];
 $sqlite = "sqlite:./data/ges.db";
 $pdo = new PDO($sqlite);
 
-$insert = "INSERT INTO contas (descricao, valor,tipo,data_venc,mes,ano,user) 
-                VALUES (:desc, :vl, :tp,:venc, :mes, :ano, :id)";
+$insert = "INSERT INTO contas (descricao, valor,tipo,data_venc,mes,ano,user,dia) 
+                VALUES (:desc, :vl, :tp,:venc, :mes, :ano, :id, :dia)";
 $in = $pdo->prepare($insert);
 $in->bindParam(":desc", $desc);
 $in->bindParam(":vl", $vl);
@@ -23,12 +23,13 @@ $in->bindParam(":venc", $venc);
 $in->bindParam(":mes", $mes);
 $in->bindParam(":ano", $ano);			
 $in->bindParam(":id", $id);	
+$in->bindParam(":dia", $dia);	
 if($in->execute()){
- echo true;
+	echo 1;
 	return true;
 }
 else{
-	echo false;
+	echo 0;
 	return false;
 }
 $pdo = null;

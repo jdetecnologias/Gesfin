@@ -6,12 +6,13 @@ $vl = $_POST["valor"];
 $venc = $_POST["dt_compra"];
 $tipoConta = 1;
 $dataEx = explode("-",$venc);
+$dia = $dataEx[2];
 $mes = $dataEx[1];
 $ano = $dataEx[0];
 $sqlite = "sqlite:../data/ges.db";
 $pdo = new PDO($sqlite);
-$insert = "INSERT INTO contas (descricao, valor,tipo,data_venc,data_pgto,mes,ano,status,user) 
-                VALUES (:desc, :vl, :tp,:venc,:venc, :mes, :ano, 1,:user)";
+$insert = "INSERT INTO contas (descricao, valor,tipo,data_venc,data_pgto,mes,ano,status,user,dia) 
+                VALUES (:desc, :vl, :tp,:venc,:venc, :mes, :ano, 1,:user,:dia)";
 $in = $pdo->prepare($insert);
 $in->bindParam(":desc", $desc);
 $in->bindParam(":vl", $vl);
@@ -20,6 +21,7 @@ $in->bindParam(":venc", $venc);
 $in->bindParam(":mes", $mes);
 $in->bindParam(":ano", $ano);			
 $in->bindParam(":user", $_SESSION["id"]);
+$in->bindParam(":dia", $dia);
 if($in->execute()){
  echo true;
 	return true;

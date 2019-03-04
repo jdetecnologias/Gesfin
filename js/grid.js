@@ -151,8 +151,8 @@ tabela.setEvento("td input","change",function(){
 	formCad.setTemplate(function(){
 		return `
 		
-			<section id="form">
-			<div id="ControleFormSaldo"><i class="fas fa-window-close fecharJan"></i></div>
+			<section id="form"  class="primaria">
+			<div id="ControleFormSaldo"><i class="fas fa-window-close fecharJan fecharX"></i></div>
 				<fieldset>
 					<input type="text" name="desc" id="descSaldo" placeholder="Descrição"/>
 				</fieldset>
@@ -176,8 +176,10 @@ tabela.setEvento("td input","change",function(){
 					</div>
 				</fieldset>
 				<fieldset id="botoes">
-					<button id="salvarSaldoForm">Gravar</button>
-					<button class="fecharJan">Cancelar</button>
+					<div id="btn">
+						<button id="salvarSaldoForm" class="bto bto-pq cor-quente">Gravar</button>
+						<button class="fecharJan bto bto-pq cor-quente">Cancelar</button>
+					</div>
 				</fieldset>
 			<section>
 		`;
@@ -211,7 +213,7 @@ tabela.setEvento("td input","change",function(){
 	});
 	formCad.defCss(function(){
 		return ` 
-				@media screen and (min-width:961px){
+				@media screen and (min-width:474px){
 					
 					section#form{
 						border-radius:10px 10px 0 0;
@@ -219,29 +221,28 @@ tabela.setEvento("td input","change",function(){
 						position:fixed;
 						font-family:sans-serif;
 						position:absolute;
-						left:40%;
+						left:39%;
 						bottom:0;
-						width:40%;
-						background-color:red;
+						width:340px;
+						background-color:r ed;
 					}
 				}
-					@media screen and (max-width:960px){
+					@media screen and (max-width:473px){
 					section#form{
 						border-radius:5px 0;
-						color:white;
 						position:fixed;
 						font-family:tresans-serif;
 						position:absolute;
 						left:5%;
 						bottom:0;
-						width:90%;
-						background-color:red;
+						width:340px;
 					}
 				}
-					fieldset#botoes{
-						width:40%;
-						margin-left:30%;
-					}
+				#btn {
+					width:180px;
+					margin-left:80px;
+				}
+
 					#ControleFormSaldo{
 						width:100%;
 						height:25px;
@@ -324,7 +325,7 @@ tabela.setEvento("td input","change",function(){
 	var botaoAddConta = new View();
 	botaoAddConta.setTemplate(function(){
 		return `
-			<button id="addConta">Adicionar</button>
+			<button id="addConta" class="bto bto-grd primaria">Adicionar</button>
 		`;
 	});
 	botaoAddConta.defCss(function(){

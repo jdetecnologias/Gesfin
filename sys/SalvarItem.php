@@ -12,7 +12,11 @@
 			$update = "update contas set valor = :value where id = :id";
 		break;
 		case "data_venc":
-			$update = "update contas set data_venc = :value where id = :id";
+			$dataEx = explode("-",$item);
+			$dia = $dataEx[2];
+			$mes = $dataEx[1];
+			$ano = $dataEx[0];
+			$update = "update contas set data_venc = :value,dia = ".$dia.", mes = ".$mes.", ano = ".$ano." where id = :id";
 		break;
 		case "data_pgto":
 			if($item == ""){

@@ -59,10 +59,8 @@ Conectar.prototype.PegarDadosFormulario = function(elemento){
 	for(var i = 0; i<qtdFilhos; i++){
 		
 		for(var z=0;z<elForm.length;z++){
-		
-			if(elemento.children[i].localName == elForm[z]){
+			if(elemento.children[i].localName == elForm[z] && this.validarCheck(elemento.children[i])){
 				this.dados += elemento.children[i].getAttribute("id")+"="+elemento.children[i].value+"&";
-				console.log(this.dados);
 			}
 			
 		}
@@ -79,6 +77,14 @@ Conectar.prototype.PegarDadosFormulario = function(elemento){
 	return this.dados;
 }
 
+Conectar.prototype.validarCheck = function(elemento){
+		if(elemento.getAttribute("type") == "radio"){
+			return elemento.checked;
+		}
+		else{
+			return true;
+			}
+	}
 
 
 

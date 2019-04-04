@@ -98,8 +98,9 @@
 		e.preventDefault();
 		var conn = new Conectar();
 		conn.PegarDadosFormulario(boxLogin.me);
-		conn.post("http://18.217.144.66/gesfinRest/sys/logar.php",function(){
-				conn.resposta = JSON.parse(conn.resposta);
+		conn.post("http://18.217.144.66/gesfinRest/login",function(){
+			conn.resposta = JSON.parse(conn.resposta);
+		
 		});
 		if(conn.resposta.status == "404"){
 			alert("Usuário não existe ou dados de login incorretos");

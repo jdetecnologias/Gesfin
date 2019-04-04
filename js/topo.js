@@ -5,7 +5,7 @@
 				<span id="hambMenu" class="hamb flutuarEsq fas fa-bars center"></span>
 				<div id="logo" class="flutuarEsq center">GFO</div>
 				<i id="notice" class="flutuarEsq fas fa-exclamation-circle"></i>
-				<a href="./sys/logout.php"><i id="sair" class="flutuarEsq fas fa-sign-out-alt"></i></a>
+				<a href="./logout.php"><i id="sair" class="flutuarEsq fas fa-sign-out-alt"></i></a>
 			</header>
 		`;
 	});

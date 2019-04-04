@@ -2,6 +2,7 @@
 session_start();
 $_SESSION["titulo"] = "Gesfin";
 
+
 if(isset($_SESSION["hash"])){
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -13,7 +14,7 @@ if(isset($_SESSION["hash"])){
 <link href="./fa/css/all.css" rel="stylesheet">
 <title><?php echo $_SESSION["titulo"];?></title>
 </head>
-<body>
+<body hash="<?php echo $_SESSION["hash"]?>">
 </body>
 </html>
 <script src="./js/funcoes.js" type="text/javascript"></script>

@@ -59,7 +59,7 @@ avulsos.setEvento("button[type=submit]","click",function(e){
 	e.preventDefault();
 	var con = new Conectar();
 	con.PegarDadosFormulario(avulsos.me);
-	con.post("./sys/avulsos.php",function(){
+	con.post("http://18.217.144.66/gesfinRest/sys/avulsos.php",function(){
 		if(con.resposta == 1){
 			alert("Dados Salvo com sucesso!");
 			avulsos.atualiza();

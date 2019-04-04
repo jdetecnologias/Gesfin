@@ -2,7 +2,7 @@
 	boxLogin.setTemplate(function(){
 		return `
 			<div id="box-login">
-			<form name="login" method="post" action="./sys/logar.php">
+			<form name="login" method="post" action="http://18.217.144.66/gesfinRest/sys/logar.php">
 		<fieldset>
 			<label>E-mail</label>
 			<input type="hidden" name="hash" id="hash"/>
@@ -94,21 +94,17 @@
 
 	});
 	
-	/*.adicionarEvento("#logar","click",function(e){
+	boxLogin.adicionarEvento("#logar","click",function(e){
 		e.preventDefault();
 		var conn = new Conectar();
 		conn.PegarDadosFormulario(boxLogin.me);
-		conn.post("./sys/logar.php",function(){
-			
+		conn.post("http://18.217.144.66/gesfinRest/sys/logar.php",function(){
+				conn.resposta = JSON.parse(conn.resposta);
 		});
-		if(conn.resposta == 0){
+		if(conn.resposta.status == "404"){
 			alert("Usuário não existe ou dados de login incorretos");
 		}
 		else{
-			boxLogin.me.querySelector("#hash").value = conn.resposta;
-			var form = boxLogin.me.querySelector("form");
-			form.addEventListener("submit",function(){
-				
-			});
+			window.location.href = "./setInfo.php?id="+conn.resposta.id+"&hash="+conn.resposta.hash;
 		}
-	});*/
+	});

@@ -1,7 +1,7 @@
 var notify = new View();
 
 var c = new Conectar();
-c.post("./sys/notificacao.php",function(){
+c.post("http://18.217.144.66/gesfinRest/sys/notificacao.php",function(){
 	
 });
 var arr = JSON.parse(c.resposta);

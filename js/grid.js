@@ -4,8 +4,8 @@
 	tabela.model = function(){
 		var conect = new Conectar();
 		conect.defDados("mes="+tabela.mes+"&ano="+tabela.ano);
-		conect.post("http://18.217.144.66/gesfinRest/sys/contasMes.php",function(){
-			
+		conect.post("http://18.217.144.66/gesfinRest/contas",function(){
+			console.log(conect.resposta);
 		});
 		return JSON.parse(conect.resposta);
 	}

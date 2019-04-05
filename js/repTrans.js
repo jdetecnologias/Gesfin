@@ -3,7 +3,7 @@
 	tabela.model = function(){
 		var conect = new Conectar();
 		conect.defDados("mes="+tabela.mes+"&ano="+tabela.ano);
-		conect.post("http://18.217.144.66/gesfinRest/sys/contasMes.php",function(){});
+		conect.post("http://18.217.144.66/gesfinRest/contas" ,function(){});
 		return JSON.parse(conect.resposta);
 	}
 	
@@ -118,13 +118,15 @@
 	tabela.mandarReq = function(ano,contas,mes,tipo){
 		if(contas.length > 0 && mes.length > 0 || tipo == "excluir"){
 			var conn = new Conectar();
-			console.log("antes",contas,typeof contas);
+			//console.log("antes",contas,typeof contas);
 			contas = JSON.stringify(contas);
 			mes = JSON.stringify(mes);
 			conn.defDados("ano="+ano+"&mes="+mes+"&contas="+contas+"&tipo="+tipo);
-			conn.post("./sys/transferirReplicar.php",function(){
-				console.log("depos","ano="+ano+"&mes="+mes+"&contas="+contas+"&tipo="+tipo);
-				if(conn.resposta == "1"){
+			conn.post("http://18.217.144.66/gesfinRest/controle",function(){
+				conn.resposta = JSON.parse(conn.resposta);
+				//console.log("retorno", conn.resposta);
+				//console.log("depos","ano="+ano+"&mes="+mes+"&contas="+contas+"&tipo="+tipo);
+				if(conn.resposta.status == "1"){
 					alert("Operação realizada com sucesso");
 					tabela.resetarCampos();
 				}
@@ -136,6 +138,9 @@
 	}
 	tabela.pegarInfo = function(){
 		var Lcheckbox = tabela.$("#tabelaContaReplicar input[type=checkbox]");
+		if(!Lcheckbox.length){
+			Lcheckbox = [Lcheckbox];
+		}
 		var LcheckboxMes = tabela.$("#selecionarMes input[type=checkbox]");
 		var Lano = tabela.$("select#ano").value;
 		var Lchecked = [];
@@ -153,18 +158,7 @@
 		return {mes:LcheckedMes,contas:Lchecked,ano:Lano}
 	}
 		tabela.resetarCampos = function(){
-		var Lcheckbox = tabela.$("#tabelaContaReplicar input[type=checkbox]");
-		var LcheckboxMes = tabela.$("#selecionarMes input[type=checkbox]");
-		Array.prototype.map.call(Lcheckbox,(itm)=>{
-			if(itm.checked){
-				itm.checked = false;
-			}
-		});
-		Array.prototype.map.call(LcheckboxMes,(itm)=>{
-			if(itm.checked){
-				itm.checked = false;
-			}
-		});
+			tabela.atualiza([tabela.mes,tabela.ano]);
 	}
 	tabela.defCss(function(){
 		return `

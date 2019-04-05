@@ -140,7 +140,7 @@ tabela.setEvento("td input","change",function(){
 				$item = this.value;
 				$id = this.parentNode.parentNode.parentNode.parentNode.getAttribute("id");
 				Con.defDados("coluna="+$coluna+"&item="+$item+"&id="+$id);
-			Con.post("./sys/SalvarItem.php",function(){
+			Con.post("http://18.217.144.66/gesfinRest/salvarItem",function(){
 			});
 					tabela.atualiza([tabela.mes]);
 		
